@@ -1,0 +1,29 @@
+diff -rs ABCDE/ConcMultiBlock.hh ABCDEtest/ConcMultiBlock.hh
+83a72,74
+>   qintB3.fill(1.);
+> 
+87,95c78
+< 	qintB3[i][j][l]=1.0;
+<       }
+<     }
+<   }
+diff -rs ABCDE/Junc_Density.hh ABCDEtest/Junc_Density.hh
+15,23c12,20 <------ Why not just divide?
+< 	JB1C[i][j][l]*=(1.0/Q);
+< 	JCB2[i][j][l]*=(1.0/Q);
+< 	JB2A[i][j][l]*=(1.0/Q);
+< 	JAB3[i][j][l]*=(1.0/Q);
+---
+> 	JB1C(i,j,l)*=(1.0/Q);
+> 	JCB2(i,j,l)*=(1.0/Q);
+> 	JB2A(i,j,l)*=(1.0/Q);
+> 	JAB3(i,j,l)*=(1.0/Q);
+diff -rs ABCDE/size_adjust.hh ABCDEtest/size_adjust.hh
+34,36c35,37<-------- Changed this to dxyz_temp=dxyz
+< 	  dxyz_temp[0]=dxyz[0];
+< 	  dxyz_temp[1]=dxyz[1];
+< 	  dxyz_temp[2]=dxyz[2];
+---
+> 	  dxyz_temp(0)=dxyz(0);
+> 	  dxyz_temp(1)=dxyz(1);
+> 	  dxyz_temp(2)=dxyz(2);
