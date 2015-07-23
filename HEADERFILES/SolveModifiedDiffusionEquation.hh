@@ -27,7 +27,7 @@ void solveModDiffEqn_FFT(double_array &q, double_array &w, double_array &qint, d
       }
     }
     
-    for(s=0;s<Ns;s++){               // Why not to Ns+1 ??
+    for(s=0;s<Ns;s++){
       
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
@@ -70,7 +70,7 @@ void solveModDiffEqn_FFT(double_array &q, double_array &w, double_array &qint, d
       }
     }
 
-    for(s=0;s<(Ns);s++){                   // why start from Ns and not 0 again?
+    for(s=0;s<(Ns);s++){
       
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
@@ -103,6 +103,5 @@ void solveModDiffEqn_FFT(double_array &q, double_array &w, double_array &qint, d
     }
   }
 
-    //std::cout<<Nx*Ny*Nz*dxyz[0]*dxyz[1]*dxyz[2]<<std::endl;
 
 };

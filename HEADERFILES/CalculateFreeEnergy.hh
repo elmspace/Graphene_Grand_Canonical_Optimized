@@ -1,43 +1,43 @@
 void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, double_array &eta, int *Ns, double ds, double_array &k_vector, double_array &chi, double_array &dxyz, double_array &chiMatrix){
-
-  
-  double  currentfE, oldfE, deltafE,oldfE_iter; 
+ 
   int     maxIter=500; 
-  int     i,j,k,iter,chain,ii,jj; 
+  int     i,j,k,iter,chain,ii,jj;
+  int     box_minimize = 1;
+  double  currentfE, oldfE, deltafE, oldfE_iter;
   double  precision=1.0e-2; 
-  double  QMultiBlock,QHomo; 
+  double  QMultiBlock,QHomo;
+  double  deltaW;
+  double  fE_homo;
   double  fEW, fEchi, fES; 
-  double  epsilon, gamma;
   double_array delphi(Nx,Ny,Nz);
   std::vector<double_array> delW;
   std::vector<double_array> newW;
-  double  deltaW;
-  double  fE_homo;
-  double  box,msg;
+
+  // Setting the acitivity
+  activity=(1.0/kappa)*exp(kappa*mu_homo - mu_copo);
 
   delW.reserve(ChainType);
   newW.reserve(ChainType);
 
-  for(unsigned n=0; n!=ChainType; n++) { delW.push_back(double_array(Nx,Ny,Nz)); newW.push_back(double_array(Nx,Ny,Nz));}
+  for(unsigned n=0; n!=ChainType; n++) {
+    delW.push_back(double_array(Nx,Ny,Nz));
+    newW.push_back(double_array(Nx,Ny,Nz));
+  }
 
   // Calculating the Homogenous Free Energy
   fE_homo=homogenousfE(chiMatrix,chi);
 
   std::cout<<"Dis Copolymer Concentration:  "<<Phi_Copo_Dis<<"  Dis Homopolymer Concentration:   "<<Phi_Homo_Dis<<std::endl;
   
-  msg=1.0;
   oldfE=1.0e2;
   std::ofstream outputFile("./RESULTS/fE.dat");
   do{
    
     WaveVectors(k_vector,dxyz);
+    
     currentfE=0.0;
-    deltafE=0.0;
-  
+    deltafE=0.0;  
     iter=0;  
-
-    epsilon=0.01;
-    gamma=0.01;
     
     do{
   
@@ -46,19 +46,14 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
       fEW=0.0;
       fEchi=0.0;
       fES=0.0;
+      deltaW=0.0;
 
       QMultiBlock=ConcMultiBlock(phi,w,Ns,ds,k_vector,dxyz);
       QHomo=ConcHomo(phi,w,Ns,ds,k_vector,dxyz);
       Incomp(eta,phi,delphi);
       Phi_Copo_Ord/=(Nx*Ny*Nz);
       Phi_Homo_Ord/=(Nx*Ny*Nz);
-
-      fEW=0.0;
-      fEchi=0.0;
       
-      deltaW=0.0;
-
-    
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  for(k=0;k<Nz;k++){
@@ -94,10 +89,9 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
       deltaW/=(Nx*Ny*Nz);
       fEchi/=(2.0*((Nx*dxyz(0))*(Ny*dxyz(1))*(Nz*dxyz(2))));
-      fEW/=(((Nx*dxyz(0))*(Ny*dxyz(1))*(Nz*dxyz(2))));
-    
+      fEW/=(((Nx*dxyz(0))*(Ny*dxyz(1))*(Nz*dxyz(2))));    
       fES=QMultiBlock+activity*QHomo;
-   
+
       currentfE=-fES-fEW+fEchi-fE_homo;
 
       deltafE=fabs(currentfE-oldfE_iter);
@@ -110,7 +104,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 	  for(k=0;k<Nz;k++){
 
 	    for(chain=0;chain<ChainType;chain++){
-	      w[chain](i,j,k)+=(gamma*delW[chain](i,j,k)-epsilon*delphi(i,j,k));
+	      w[chain](i,j,k)+=(epsilon_delomega*delW[chain](i,j,k)-epsilon_delphi*delphi(i,j,k));
 	    }
 
 	  }
@@ -121,27 +115,22 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 	SaveData(phi,w,dxyz);
       }
 
-      //std::cin>>i;
 	
-    }while(deltaW>precision);//while(iter<maxIter);//
+    }while((deltaW>precision) || (iter<maxIter));
 
 
     outputFile <<currentfE<<" "<<fE_homo<<" "<<dxyz(0)*Nx<<" "<<dxyz(1)*Ny<<" "<<dxyz(2)*Nz<<std::endl;
 
-    box=size_adjust(w,phi,eta,Ns,ds,k_vector,chi,dxyz,chiMatrix);
+    size_adjust(w,phi,eta,Ns,ds,k_vector,chi,dxyz,chiMatrix);
  
-   
     if(oldfE<currentfE){
-      msg=0.0;
-    }
-    if(msg>0.5){
+      box_minimize=0;
+    }else{
       oldfE=currentfE;
     }
-    if(box_min==0){
-      msg=0.0;
-    }
+    if(box_min==0){ box_minimize=0;}
     
-  }while(msg>0.5);
+  }while(box_minimize==1);
 
   SaveData(phi,w,dxyz);
 

@@ -22,7 +22,7 @@ void Mod1(double ****w, double ****phi, double ***eta, double *Ns, double ds, do
   mu_copo=0.0;
   activity=(1.0/kappa)*exp(kappa*mu_homo - mu_copo);
   
-  omega_alphaBN(w);
+  omega_alphaBN(w,chiMatrix);
 
   
   do{

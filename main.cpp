@@ -1,22 +1,18 @@
 
 #include "./global.hh"
-#include "./ABCDE/parameters.hh"
-#include "./ABCDE/WaveVectors.hh"
-#include "./ABCDE/omega.hh"
-#include "./ABCDE/omega_alphaBN.hh"
-#include "./ABCDE/omega_ZnSc.hh"
-#include "./ABCDE/omega_alphaBN_bilayer.hh"
-#include "./ABCDE/omega_CAC.hh"
-#include "./ABCDE/solvediffeq.hh"
-#include "./ABCDE/Junc_Density.hh"
-#include "./ABCDE/ConcMultiBlock.hh"
-#include "./ABCDE/ConcHomo.hh"
-#include "./ABCDE/fEhomo.hh"
-#include "./ABCDE/Incomp.hh"
-#include "./ABCDE/FreeEnergy_Box_Edition.hh"
-#include "./ABCDE/size_adjust.hh"
-#include "./ABCDE/SaveData.hh"
-#include "./ABCDE/FreeEnergy.hh"
+#include "./HEADERFILES/SetParameters.hh"                              // <===== needs fixing
+#include "./HEADERFILES/SetWaveVectors.hh"                             // <===== good
+#include "./HEADERFILES/SetOmega.hh"                                   // <===== needs fixing
+#include "./HEADERFILES/SolveModifiedDiffusionEquation.hh"             // <===== good
+#include "./HEADERFILES/CalculateJunctionDensity.hh"                   // <===== ignore for now
+#include "./HEADERFILES/ConcMultiBlock.hh"                             // <===== good
+#include "./HEADERFILES/ConcHomo.hh"                                   // <===== good
+#include "./HEADERFILES/CalculateHomogenousFreeEnergy.hh"              // <===== good
+#include "./HEADERFILES/CalculateEta.hh"                               // <===== good
+#include "./HEADERFILES/CalculateFreeEnergy_BoxOptimization.hh"        // <===== good
+#include "./HEADERFILES/OptimizeBoxSize.hh"                            // <===== needs to be checked
+#include "./HEADERFILES/SaveData.hh"                                   // <===== good
+#include "./HEADERFILES/CalculateFreeEnergy.hh"                        // <===== good
 #include <vector>
 #include "./MODS/Mod1test.hh"
 
@@ -64,7 +60,6 @@ int main(){
  
   //________________________________________________________________________________________________________________________________
 
-
   Mod1(w,phi,eta,Ns,ds,k_vector,chi,dxyz,chiMatrix);
   
   //________________________________________________________________________________________________________________________________
@@ -85,23 +80,3 @@ int main(){
   return 0;
 }
 
-
-
-
- //omega_alphaBN(w);
-  //omega_CAC(w);
-  //omega_alphaBN_bilayer(w);
-  //omega_ZnSc(w);
-
-  /*
-  double fE_homo;
-  std::ofstream outputFile("./RESULTS/p_ave.dat");
-  do{
-    fE_homo=homogenousfE(chiMatrix,chi);
-    std::cout<<Phi_Copo_Dis<<" "<<Phi_Homo_Dis<<" "<<mu_homo<<std::endl;
-    outputFile <<Phi_Copo_Dis<<" "<<Phi_Homo_Dis<<" "<<mu_homo<<std::endl;
-    mu_homo+=0.1;
-  }while(Phi_Homo_Dis<0.999);
-  outputFile.close();
-  std::cin>>i;
-  */

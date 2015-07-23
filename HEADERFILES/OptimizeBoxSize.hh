@@ -1,4 +1,4 @@
-double size_adjust(std::vector<double_array> &w, std::vector<double_array> &phi, double_array &eta, int *Ns, double ds, double_array &k_vector, double_array &chi, double_array &dxyz, double_array &chiMatrix){
+void size_adjust(std::vector<double_array> &w, std::vector<double_array> &phi, double_array &eta, int *Ns, double ds, double_array &k_vector, double_array &chi, double_array &dxyz, double_array &chiMatrix){
 
   int     i,j,k,l,ii,jj,ll,kk;
   double  delx,dely,delz;
@@ -79,13 +79,12 @@ double size_adjust(std::vector<double_array> &w, std::vector<double_array> &phi,
   
   
   box=1;
-  return box;
+
   
   destroy_1d_double_array(box_x);
   destroy_1d_double_array(box_y);
   destroy_1d_double_array(box_z);
   destroy_1d_double_array(box_fE);
-
   
 };
 

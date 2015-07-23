@@ -4,7 +4,22 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   double xAB,xAC,xBC, xAhom, xChom, xBhom;
   double a;
   double Lx,Ly,Lz;
- 
+
+  // Setting chemical potentials
+  mu_homo=-13.7;
+  mu_copo=0.0;
+
+  // 0 = Read From File    1 = Make Structure
+  Iomega=0;
+
+  //set the morphology 1=on 0=off **(going to change the way this is done)
+  AlphaB=0;
+  Bilayer=0;
+  CAC=1;
+  LAM=0.0;
+  HEX=0.0;
+  BCC=0.0;
+  
   // Minimize with respect to box size (yes=1, No=0)
   box_min=0;
 
@@ -19,89 +34,55 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   // Degree of polymerization
   Ns[0]=20; // A
   Ns[1]=20; // C
-
   Ns[3]=18; // B2 Center
-
   Ns[2]=(200-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
   Ns[4]=Ns[2]; // B3
- 
-  Ns[5]=100; // B4
+  Ns[5]=100; // B4 (Homopolymer)
 
   // Total length
   Ds=Ns[0]+Ns[1]+Ns[2]+Ns[3]+Ns[4];
 
-
-  // 0 = Read From File
-  // 1 = Make Structure
-  // 2 = Random Field
-  Iomega=0;
-
-  AlphaB=0;
-  Bilayer=0;
-  CAC=1;
+  // Step size along chain
+  ds=1.0/Ds;
   
-  
-  //set the morphology 1=on 0=off
-  LAM=0.0;
-  HEX=0.0;
-  BCC=0.0;
-
-
+  // Setting box size
   Lx=10.0;
   Ly=10.0;
   Lz=10.0;
 
+  // ***** change the way this is done
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=3.5;}
   if(AlphaB==1){ Lx=2.36; Ly=4.17; Lz=4.77;}
 
-
+  // dx, dy, dz step size
   dxyz(0)=Lx/Nx;
   dxyz(1)=Ly/Ny;
   dxyz(2)=Lz/Nz;
  
-  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 
-  fA=1.*Ns[0]/Ds;  // fA
-  fC=1.*Ns[1]/Ds;  // fC
-  fB1=1.*Ns[2]/Ds;  // fB1
-  fB2=1.*Ns[3]/Ds;  // fB2
-  fB3=1.*Ns[4]/Ds;  // fB3
-  kappa=1.*Ns[5]/Ds; // kappa
+  //Setting the chain fractions
+  fA=(double)Ns[0]/(double)Ds;// fA
+  fC=(double)Ns[1]/(double)Ds;// fC
+  fB1=(double)Ns[2]/(double)Ds;// fB1
+  fB2=(double)Ns[3]/(double)Ds;// fB2
+  fB3=(double)Ns[4]/(double)Ds;// fB3
+  kappa=(double)Ns[5]/(double)Ds;// kappa for homopolymer
 
-  
-  mu_homo=-13.7;
-  mu_copo=0.0;
-  activity=(1.0/kappa)*exp(kappa*mu_homo - mu_copo);
-
-  
   // Setting up the individual chi values
   chi(0)=xAC;  //xAC
   chi(1)=xAB;  //xAB1
   chi(2)=xAB;  //xAB2
   chi(3)=xAB;  //xAB3
   chi(4)=xAhom;  //xAB4
-  
   chi(5)=xBC;  //xCB1
   chi(6)=xBC;  //xCB2
   chi(7)=xBC;  //xCB3
   chi(8)=xChom;  //xCB4
-  
   chi(9)=0.0;  //xB1B2
   chi(10)=0.0; //xB1B3
   chi(11)=xBhom; //xB1B4
-  
   chi(12)=0.0; //xB2B3
   chi(13)=xBhom; //xB2B4
-  
   chi(14)=xBhom; //xB3B4
-
-  //++++++++++++++++++++++++++++++++++++++++++++++++
-
-  ds=1.0/Ds;
-  
-
-
   // Setting up the chi matrix in this case 8 by 8
   //1
   chiMatrix(0,0)=0.0;       
@@ -146,8 +127,4 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   chiMatrix(5,4)=chi(14);     
   chiMatrix(5,5)=0.0;    
  
-
-
-
-
 };

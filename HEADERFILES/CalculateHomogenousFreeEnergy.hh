@@ -1,13 +1,13 @@
 double homogenousfE(double_array &chiMatrix, double_array &chi){
 
-  int i, j, iter = 0, Iter = 1000000;
+  int i, j, iter = 0, Iter = 100000;
   double wA_ave, wC_ave, wB1_ave, wB2_ave, wB3_ave, wB4_ave;
   double pA_ave, pC_ave, pB1_ave, pB2_ave, pB3_ave, pB4_ave;
   double dwA_ave, dwC_ave, dwB1_ave, dwB2_ave, dwB3_ave, dwB4_ave;
   double eta_ave;
   double dW, dW_cutoff = 1.0e-3;
   double dP, dP_cutoff = 1.0e-3;
-  double sigma = 0.01;
+  double sigma = 0.005;
   double  *w_ave, *p_ave;
   double fE_homo;
 
@@ -41,7 +41,7 @@ double homogenousfE(double_array &chiMatrix, double_array &chi){
 
   do{
 
-    eta_ave = eta_ave - 0.5*(1.0-(pA_ave+pC_ave+pB1_ave+pB2_ave+pB3_ave+pB4_ave));
+    eta_ave = eta_ave - 0.05*(1.0-(pA_ave+pC_ave+pB1_ave+pB2_ave+pB3_ave+pB4_ave));
     
     pA_ave = exp(mu_copo - wA_ave*fA - wC_ave*fC - wB1_ave*fB1 - wB2_ave*fB2 - wB3_ave*fB3) * fA;
     pC_ave = exp(mu_copo - wA_ave*fA - wC_ave*fC - wB1_ave*fB1 - wB2_ave*fB2 - wB3_ave*fB3) * fC;
@@ -62,19 +62,26 @@ double homogenousfE(double_array &chiMatrix, double_array &chi){
     
     dP = 1.0 - (pA_ave+pC_ave+pB1_ave+pB2_ave+pB3_ave+pB4_ave);
     dW = (dwA_ave + dwC_ave + dwB1_ave + dwB2_ave + dwB3_ave + dwB4_ave) / 6.0;
+
+    //std::cout<<dW<<" "<<dP<<std::endl;
     
-    wA_ave += sigma*dwA_ave - sigma*dP;
-    wC_ave += sigma*dwC_ave- sigma*dP;
-    wB1_ave += sigma*dwB1_ave- sigma*dP;
-    wB2_ave += sigma*dwB2_ave- sigma*dP;
-    wB3_ave += sigma*dwB3_ave- sigma*dP;
-    wB4_ave += sigma*dwB4_ave- sigma*dP;
+    wA_ave += sigma*dwA_ave-sigma*dP;
+    wC_ave += sigma*dwC_ave-sigma*dP;
+    wB1_ave += sigma*dwB1_ave-sigma*dP;
+    wB2_ave += sigma*dwB2_ave-sigma*dP;
+    wB3_ave += sigma*dwB3_ave-sigma*dP;
+    wB4_ave += sigma*dwB4_ave-sigma*dP;
 
     iter++;
     
   }while(iter<Iter);
 
 
+  if(abs(dW)>0.0001){
+    std::cout<<"The homogenous free energy did not converege!"<<std::endl;
+    exit(-1);
+  }
+  
   w_ave[0] = wA_ave;
   w_ave[1] = wC_ave;
   w_ave[2] = wB1_ave;

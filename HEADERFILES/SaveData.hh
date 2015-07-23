@@ -45,11 +45,16 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
   } else {
     std::cout<<"Somethig is wrong in the SaveData.hh"<<std::endl;
   }
+
+
+
+
+
+
+  
     
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Writting to data files
-
-
   std::string omega="./OMEGA/DURING_RUN/omega_" + std::to_string(abs(mu_homo)) + "_.dat";
   std::ofstream outputFile6(omega);
   for(i=0;i<Nx;i++){
@@ -64,9 +69,18 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
 
 
 
+
+
+
+
+
+
+
+  
+
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Writting Phi1D to data files
-
+  
   std::string phi_x="./PHI/phix.dat";
   std::string phi_y="./PHI/phiy.dat";
   std::string phi_z="./PHI/phiz.dat";

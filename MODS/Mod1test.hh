@@ -21,7 +21,7 @@ void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_a
   mu_copo=0.0;
   activity=(1.0/kappa)*exp(kappa*mu_homo - mu_copo);
   
-  omega(w);
+  omega(w,chiMatrix);
 
   
   do{
