@@ -111,9 +111,9 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 	}
       }
 
-      if(Test==1){
+      //if(Test==1){
 	SaveData(phi,w,dxyz);
-      }
+	//}
 
 	
     }while((deltaW>precision) || (iter<maxIter));

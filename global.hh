@@ -22,8 +22,8 @@ using namespace std;
 #define Nz 32
 
 // Updating parameters
-double epsilon_delomega = 0.01;
-double epsilon_delphi = 0.01;
+double epsilon_delomega = 0.05;
+double epsilon_delphi = 0.05;
 
 // Number of polymer species
 #define ChainType 6
@@ -31,12 +31,14 @@ double epsilon_delphi = 0.01;
 int Iomega;
 int box_min;
 int Test;
-int AlphaB, Bilayer, CAC;
+int AlphaBN, Bilayer, CAC, CsCl, ZnSc;
+int LAM, HEX, BCC;
 
+int NB_middle;
 double kappa;
 double fA,fC,fB1,fB2,fB3;
 double forceD,forceE;
-double LAM, HEX, BCC;
+
 double activity;
 double mu_homo, mu_copo;
 double Phi_Copo_Dis, Phi_Homo_Dis;

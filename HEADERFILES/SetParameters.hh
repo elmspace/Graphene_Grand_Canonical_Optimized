@@ -11,33 +11,25 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
 
   // 0 = Read From File    1 = Make Structure
   Iomega=0;
-
-  //set the morphology 1=on 0=off **(going to change the way this is done)
-  AlphaB=0;
-  Bilayer=0;
-  CAC=1;
-  LAM=0.0;
-  HEX=0.0;
-  BCC=0.0;
   
   // Minimize with respect to box size (yes=1, No=0)
-  box_min=0;
+  box_min=1;
 
   // Setting the generic chi parameters
-  xAB=80.0;
-  xAC=80.0;
-  xBC=80.0;
-  xAhom=80.0;
-  xChom=80.0;
+  xAB=180.0;
+  xAC=180.0;
+  xBC=180.0;
+  xAhom=180.0;
+  xChom=180.0;
   xBhom=0.0;
 
   // Degree of polymerization
   Ns[0]=20; // A
   Ns[1]=20; // C
-  Ns[3]=18; // B2 Center
+  Ns[3]=NB_middle; // B2 Center
   Ns[2]=(200-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
   Ns[4]=Ns[2]; // B3
-  Ns[5]=100; // B4 (Homopolymer)
+  Ns[5]=10; // B4 (Homopolymer)
 
   // Total length
   Ds=Ns[0]+Ns[1]+Ns[2]+Ns[3]+Ns[4];
@@ -46,13 +38,15 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   ds=1.0/Ds;
   
   // Setting box size
-  Lx=10.0;
-  Ly=10.0;
-  Lz=10.0;
+  Lx=4;
+  Ly=4;
+  Lz=4;
 
-  // ***** change the way this is done
-  if(CAC==1){ Lx=2.64; Ly=4.36; Lz=3.5;}
-  if(AlphaB==1){ Lx=2.36; Ly=4.17; Lz=4.77;}
+  // Initial Guess for box dimension
+  if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
+  if(ZnSc==1){ Lx=3.5; Ly=3.5; Lz=3.5;}
+  if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
+ 
 
   // dx, dy, dz step size
   dxyz(0)=Lx/Nx;
