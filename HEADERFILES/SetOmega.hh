@@ -9,7 +9,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   for(int n=0; n<ChainType; n++){
     phi_w.push_back(double_array(Nx,Ny,Nz));
   }  
-
+  
   
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++   Setting to Zero
@@ -46,13 +46,11 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
       for(j=0;j<Ny;j++){
 	for(k=0;k<Nz;k++){
 	  infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
-	  phi_w[0](i,j,k)*=5.0;
-	  phi_w[1](i,j,k)*=5.0;
 	}
       }
     }
-    infile.close();    
-
+    infile.close();
+    
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++         Setting W
   }else if(Iomega==1){
@@ -231,9 +229,6 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 
 
 
-
-  
-
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Setting the omega field from the input phi
@@ -251,7 +246,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   }
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  
+
 
 
   

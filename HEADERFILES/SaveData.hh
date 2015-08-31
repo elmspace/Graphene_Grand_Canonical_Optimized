@@ -59,20 +59,26 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
   std::string phi_z="./PHI/phiz.dat";
   
   std::ofstream outputFile5(phi_x);
+  j=0;
+  k=0;
   for(i=0;i<Nx;i++){
-    outputFile5 <<i*dxyz(0)<< " "<<phi[0](i,Ny/2,Nz/2)<<" "<<phi[1](i,Ny/2,Nz/2)<<" "<<phi[2](i,Ny/2,Nz/2)<<" "<<phi[3](i,Ny/2,Nz/2)<<" "<<phi[4](i,Ny/2,Nz/2)<< " "<<phi[5](i,Ny/2,Nz/2)<<std::endl;
+    outputFile5 <<i*dxyz(0)<< " "<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<< " "<<phi[5](i,j,k)<<std::endl;
   }
   outputFile5.close();
   
   std::ofstream outputFile6(phi_y);
+  i=0;
+  k=0;
   for(j=0;j<Ny;j++){
-    outputFile6 <<j*dxyz(1)<< " "<<phi[0](Nx/2,j,Nz/2)<<" "<<phi[1](Nx/2,j,Nz/2)<<" "<<phi[2](Nx/2,j,Nz/2)<<" "<<phi[3](Nx/2,j,Nz/2)<<" "<<phi[4](Nx/2,j,Nz/2)<< " "<<phi[5](Nx/2,j,Nz/2)<<std::endl;
+    outputFile6 <<j*dxyz(1)<< " "<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<< " "<<phi[5](i,j,k)<<std::endl;
   }
   outputFile6.close();
   
   std::ofstream outputFile7(phi_z);
+  i=0;
+  j=0;
   for(k=0;k<Nz;k++){
-    outputFile7 <<k*dxyz(2)<< " "<<phi[0](Nx/2,Ny/2,k)<<" "<<phi[1](Nx/2,Ny/2,k)<<" "<<phi[2](Nx/2,Ny/2,k)<<" "<<phi[3](Nx/2,Ny/2,k)<<" "<<phi[4](Nx/2,Ny/2,k)<< " "<<phi[5](Nx/2,Ny/2,k)<<std::endl;
+    outputFile7 <<k*dxyz(2)<< " "<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<< " "<<phi[5](i,j,k)<<std::endl;
   }
   outputFile7.close();
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

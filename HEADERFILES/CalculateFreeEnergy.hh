@@ -4,7 +4,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
   int     i,j,k,iter,chain,ii,jj;
   int     box_minimize = 1;
   double  currentfE, oldfE, deltafE, oldfE_iter;
-  double  precision=1.0e-2; 
+  double  precision=1.0e-3; 
   double  QMultiBlock,QHomo;
   double  deltaW;
   double  fE_homo;
@@ -27,7 +27,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
   // Calculating the Homogenous Free Energy
   fE_homo=homogenousfE(chiMatrix,chi);
 
-  std::cout<<"Dis Copolymer Concentration:  "<<Phi_Copo_Dis<<"  Dis Homopolymer Concentration:   "<<Phi_Homo_Dis<<std::endl;
+  //std::cout<<"Dis Copolymer Concentration:  "<<Phi_Copo_Dis<<"  Dis Homopolymer Concentration:   "<<Phi_Homo_Dis<<std::endl;
   
   oldfE=1.0e2;
   std::ofstream outputFile("./RESULTS/fE.dat");
@@ -96,7 +96,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
       deltafE=fabs(currentfE-oldfE_iter);
 
-      std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
+      //std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
       oldfE_iter=currentfE;
 
       for(i=0;i<Nx;i++){
@@ -112,13 +112,14 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
       }
 
       //if(Test==1){
-	SaveData(phi,w,dxyz);
-	//}
+      //SaveData(phi,w,dxyz);
+      //}
 
 	
     }while((deltaW>precision) || (iter<maxIter));
 
-
+    SaveData(phi,w,dxyz);
+    
     outputFile <<currentfE<<" "<<fE_homo<<" "<<dxyz(0)*Nx<<" "<<dxyz(1)*Ny<<" "<<dxyz(2)*Nz<<std::endl;
 
     size_adjust(w,phi,eta,Ns,ds,k_vector,chi,dxyz,chiMatrix);

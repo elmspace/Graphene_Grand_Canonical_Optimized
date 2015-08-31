@@ -16,11 +16,11 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   box_min=1;
 
   // Setting the generic chi parameters
-  xAB=180.0;
-  xAC=180.0;
-  xBC=180.0;
-  xAhom=180.0;
-  xChom=180.0;
+  xAB=80.0;
+  xAC=80.0;
+  xBC=80.0;
+  xAhom=0.0;
+  xChom=0.0;
   xBhom=0.0;
 
   // Degree of polymerization
@@ -44,7 +44,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
 
   // Initial Guess for box dimension
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
-  if(ZnSc==1){ Lx=3.5; Ly=3.5; Lz=3.5;}
+  if(ZnSc==1){ Lx=3.0; Ly=3.0; Lz=3.0;}
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
  
 
