@@ -11,6 +11,7 @@
 #include <time.h>
 #include "./include/smemory.hh"
 #include <vector>
+#include <omp.h>
 
 using namespace std;
 
@@ -21,9 +22,12 @@ using namespace std;
 #define Ny 32
 #define Nz 32
 
+// this is used for Andersion Mixing
+int const History = 3;
+
 // Updating parameters
-double epsilon_delomega = 0.05;
-double epsilon_delphi = 0.05;
+double epsilon_delomega = 0.07;
+double epsilon_delphi = 0.07;
 
 // Number of polymer species
 #define ChainType 6
@@ -33,6 +37,7 @@ int box_min;
 int Test;
 int AlphaBN, Bilayer, CAC, CsCl, ZnSc;
 int LAM, HEX, BCC;
+int global_index;
 
 int NB_middle;
 double kappa;
@@ -46,7 +51,10 @@ double Phi_Copo_Ord, Phi_Homo_Ord;
 double Free_Energy, Free_Energy_Homo;
 double Lx, Ly, Lz;
 double *input_q, *transformed_q, *final_q;
+double *input_q_dag, *transformed_q_dag, *final_q_dag;
+int gibberishnamekdshfsjhd = fftw_init_threads();
 fftw_plan forward_plan, inverse_plan;
+fftw_plan forward_plan_dag, inverse_plan_dag;
 
 typedef array_t<double> double_array;
 

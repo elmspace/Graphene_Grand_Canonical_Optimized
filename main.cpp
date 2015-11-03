@@ -4,15 +4,21 @@
 #include "./HEADERFILES/SetParameters.hh"                             
 #include "./HEADERFILES/SetWaveVectors.hh"                             
 #include "./HEADERFILES/SetOmega.hh"                                   
-#include "./HEADERFILES/SolveModifiedDiffusionEquation.hh"             
-#include "./HEADERFILES/CalculateJunctionDensity.hh"                   // <===== ignore for now
+#include "./HEADERFILES/SolveModifiedDiffusionEquation_Forward.hh"
+#include "./HEADERFILES/SolveModifiedDiffusionEquation_Backward.hh"
+#include "./HEADERFILES/CalculateJunctionDensity.hh"  
 #include "./HEADERFILES/ConcMultiBlock.hh"                            
 #include "./HEADERFILES/ConcHomo.hh"                                  
 #include "./HEADERFILES/CalculateHomogenousFreeEnergy.hh"              
 #include "./HEADERFILES/CalculateEta.hh"                              
 #include "./HEADERFILES/CalculateFreeEnergy_BoxOptimization.hh"       
-#include "./HEADERFILES/OptimizeBoxSize.hh"                            // <===== needs to be checked
-#include "./HEADERFILES/SaveData.hh"                                   
+#include "./HEADERFILES/OptimizeBoxSize.hh"
+#include "./HEADERFILES/SaveData.hh"
+
+#include "./HEADERFILES/MatrixInverse.hh"
+#include "./HEADERFILES/Inner_Prod_Func.hh"
+#include "./HEADERFILES/AndersonMixing.hh"
+
 #include "./HEADERFILES/CalculateFreeEnergy.hh"                        
 #include <vector>
 #include "./MODS/Mod1.hh"
@@ -26,7 +32,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 
-
+  omp_set_num_threads(2);
   // --------------------------------------------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------------------------------------------
@@ -53,12 +59,21 @@ int main(int argc, char* argv[]){
   time_t t;
   iseed=time(&t);
   srand48(iseed);
+  
   input_q=(double*)fftw_malloc(sizeof(double)*Nx*Ny*Nz);
   transformed_q=(double*)fftw_malloc(sizeof(double)*Nx*Ny*Nz);
   final_q=(double*)fftw_malloc(sizeof(double)*Nx*Ny*Nz);
 
+  input_q_dag=(double*)fftw_malloc(sizeof(double)*Nx*Ny*Nz);
+  transformed_q_dag=(double*)fftw_malloc(sizeof(double)*Nx*Ny*Nz);
+  final_q_dag=(double*)fftw_malloc(sizeof(double)*Nx*Ny*Nz);
+
+  fftw_plan_with_nthreads(2);
   forward_plan=fftw_plan_r2r_3d(Nx,Ny,Nz,input_q,transformed_q,FFTW_REDFT10,FFTW_REDFT10,FFTW_REDFT10,i);
   inverse_plan=fftw_plan_r2r_3d(Nx,Ny,Nz,transformed_q,final_q,FFTW_REDFT01,FFTW_REDFT01,FFTW_REDFT01,i);
+
+  forward_plan_dag=fftw_plan_r2r_3d(Nx,Ny,Nz,input_q_dag,transformed_q_dag,FFTW_REDFT10,FFTW_REDFT10,FFTW_REDFT10,i);
+  inverse_plan_dag=fftw_plan_r2r_3d(Nx,Ny,Nz,transformed_q_dag,final_q_dag,FFTW_REDFT01,FFTW_REDFT01,FFTW_REDFT01,i);
   //--------------------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------

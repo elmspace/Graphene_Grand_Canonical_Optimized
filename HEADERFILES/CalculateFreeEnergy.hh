@@ -27,7 +27,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
   // Calculating the Homogenous Free Energy
   fE_homo=homogenousfE(chiMatrix,chi);
 
-  //std::cout<<"Dis Copolymer Concentration:  "<<Phi_Copo_Dis<<"  Dis Homopolymer Concentration:   "<<Phi_Homo_Dis<<std::endl;
+  std::cout<<"Dis Copolymer Concentration:  "<<Phi_Copo_Dis<<"  Dis Homopolymer Concentration:   "<<Phi_Homo_Dis<<std::endl;
   
   oldfE=1.0e2;
   std::ofstream outputFile("./RESULTS/fE.dat");
@@ -40,8 +40,9 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
     iter=0;  
     
     do{
-  
-      iter++;
+      
+      global_index=iter;
+      
     
       fEW=0.0;
       fEchi=0.0;
@@ -54,24 +55,16 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
       Phi_Copo_Ord/=(Nx*Ny*Nz);
       Phi_Homo_Ord/=(Nx*Ny*Nz);
       
-      for(i=0;i<Nx;i++){
-	for(j=0;j<Ny;j++){
-	  for(k=0;k<Nz;k++){
-	    for(ii=0;ii<ChainType;ii++){
-	      newW[ii](i,j,k)=0.0;  
-	    }
-	  }
-	}
-      }
 
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  for(k=0;k<Nz;k++){
 
 	    for(ii=0;ii<ChainType;ii++){
+	      newW[ii](i,j,k)=0.0;
 	      for(jj=0;jj<ChainType;jj++){
 	  
-		newW[ii](i,j,k)+=chiMatrix(ii,jj)*(phi[jj](i,j,k));
+		newW[ii](i,j,k)+=chiMatrix(ii,jj)*phi[jj](i,j,k);
 		fEchi+=phi[ii](i,j,k)*chiMatrix(ii,jj)*phi[jj](i,j,k)*dxyz(0)*dxyz(1)*dxyz(2);
 
 	      }
@@ -96,9 +89,10 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
       deltafE=fabs(currentfE-oldfE_iter);
 
-      //std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
+      std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
       oldfE_iter=currentfE;
 
+      /*
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  for(k=0;k<Nz;k++){
@@ -110,12 +104,15 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 	  }
 	}
       }
+      */
+
+      AndersonMixing(w,newW,dxyz);
 
       //if(Test==1){
-      //SaveData(phi,w,dxyz);
+      SaveData(phi,w,dxyz);
       //}
 
-	
+      iter++;
     }while((deltaW>precision) || (iter<maxIter));
 
     SaveData(phi,w,dxyz);

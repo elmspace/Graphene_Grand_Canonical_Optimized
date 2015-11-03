@@ -1,6 +1,6 @@
 double ConcMultiBlock(std::vector<double_array> &phi,std::vector<double_array> &w, int *Ns,double ds,double_array &k_vector,double_array &dxyz){
 
-  int         i,j,l,s;
+  int         s;
   double      Q;
 
   double_array	qA(Nx,Ny,Nz,Ns[0]+1);
@@ -20,124 +20,138 @@ double ConcMultiBlock(std::vector<double_array> &phi,std::vector<double_array> &
   double_array	qintB1(Nx,Ny,Nz);
   double_array	qintB2(Nx,Ny,Nz);
   double_array	qintB3(Nx,Ny,Nz);
+
+  double_array	qintdagA(Nx,Ny,Nz);
+  double_array	qintdagC(Nx,Ny,Nz);
+  double_array	qintdagB1(Nx,Ny,Nz);
+  double_array	qintdagB2(Nx,Ny,Nz);
+  double_array	qintdagB3(Nx,Ny,Nz);
  
-
-  //+++++++++++++++++++++++++++++++++++++++Forward++++++++++++++++++++++++++++++++++++++++++++++++++
+#pragma omp parallel sections num_threads(2)
+  {
+    //+++++++++++++++++++++++++++++++++++++++Forward++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#pragma omp section
+    {
+      qintB1.fill(1.);
+      
+      solveModDiffEqn_FFT_Forward(qB1,w[2],qintB1,ds,Ns[2],1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintA(i,j,l)=qB1(i,j,l,Ns[2]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Forward(qA,w[0],qintA,ds,Ns[0],1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintB2(i,j,l)=qA(i,j,l,Ns[0]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Forward(qB2,w[3],qintB2,ds,Ns[3],1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintC(i,j,l)=qB2(i,j,l,Ns[3]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Forward(qC,w[1],qintC,ds,Ns[1],1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintB3(i,j,l)=qC(i,j,l,Ns[1]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Forward(qB3,w[4],qintB3,ds,Ns[4],1,k_vector,dxyz);
+    }
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+    //+++++++++++++++++++++++++++++++++++++++++++Backward+++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#pragma omp section
+    {
+      qintdagB3.fill(1.);
+      
+      solveModDiffEqn_FFT_Backward(qdagB3,w[4],qintdagB3,ds,Ns[4],-1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintdagC(i,j,l)=qdagB3(i,j,l,Ns[4]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Backward(qdagC,w[1],qintdagC,ds,Ns[1],-1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintdagB2(i,j,l)=qdagC(i,j,l,Ns[1]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Backward(qdagB2,w[3],qintdagB2,ds,Ns[3],-1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintdagA(i,j,l)=qdagB2(i,j,l,Ns[3]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Backward(qdagA,w[0],qintdagA,ds,Ns[0],-1,k_vector,dxyz);
+      for(int i=0;i<Nx;i++){
+	for(int j=0;j<Ny;j++){
+	  for(int l=0;l<Nz;l++){
+	    qintdagB1(i,j,l)=qdagA(i,j,l,Ns[0]);
+	  }
+	}
+      }
+      
+      solveModDiffEqn_FFT_Backward(qdagB1,w[2],qintdagB1,ds,Ns[2],-1,k_vector,dxyz);
+    }
+  }
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  qintB1.fill(1.);
-
-  solveModDiffEqn_FFT(qB1,w[2],qintB1,ds,Ns[2],1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintA(i,j,l)=qB1(i,j,l,Ns[2]);
-      }
-    }
-  }
-  
-  solveModDiffEqn_FFT(qA,w[0],qintA,ds,Ns[0],1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintB2(i,j,l)=qA(i,j,l,Ns[0]);
-      }
-    }
-  }
-  
-  solveModDiffEqn_FFT(qB2,w[3],qintB2,ds,Ns[3],1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintC(i,j,l)=qB2(i,j,l,Ns[3]);
-      }
-    }
-  }
-  
-  solveModDiffEqn_FFT(qC,w[1],qintC,ds,Ns[1],1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintB3(i,j,l)=qC(i,j,l,Ns[1]);
-      }
-    }
-  }
-  
-  solveModDiffEqn_FFT(qB3,w[4],qintB3,ds,Ns[4],1,k_vector,dxyz);
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  //+++++++++++++++++++++++++++++++++++++++++++Backward+++++++++++++++++++++++++++++++++++++++++++++
-  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  qintB3.fill(1.);
-
-  solveModDiffEqn_FFT(qdagB3,w[4],qintB3,ds,Ns[4],-1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintC(i,j,l)=qdagB3(i,j,l,Ns[4]);
-      }
-    }
-  }
   
-  solveModDiffEqn_FFT(qdagC,w[1],qintC,ds,Ns[1],-1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintB2(i,j,l)=qdagC(i,j,l,Ns[1]);
-      }
-    }
-  }
   
-  solveModDiffEqn_FFT(qdagB2,w[3],qintB2,ds,Ns[3],-1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintA(i,j,l)=qdagB2(i,j,l,Ns[3]);
-      }
-    }
-  }
-  
-  solveModDiffEqn_FFT(qdagA,w[0],qintA,ds,Ns[0],-1,k_vector,dxyz);
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-	qintB1(i,j,l)=qdagA(i,j,l,Ns[0]);
-      }
-    }
-  }
-  
-  solveModDiffEqn_FFT(qdagB1,w[2],qintB1,ds,Ns[2],-1,k_vector,dxyz);
-  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
- 
   //++++++++++++++++++++++++++++++++++++++Single Chain Partition Function+++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   Q=0.0;
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
+#pragma omp parallel for reduction(+:Q)
+  for(int i=0;i<Nx;i++){
+    for(int j=0;j<Ny;j++){
+      for(int l=0;l<Nz;l++){
 	Q+=(qdagB1(i,j,l,Ns[2]))*dxyz(0)*dxyz(1)*dxyz(2);
       }
     }
   }
   // Normalizing with respect to the volume of the box
   Q/=((dxyz(0)*Nx)*(dxyz(1)*Ny)*(dxyz(2)*Nz));
-
+  
   
   // Here we do the concentration calculation
-  for(i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(l=0;l<Nz;l++){
-
-
+  for(int i=0;i<Nx;i++){
+    for(int j=0;j<Ny;j++){
+      for(int l=0;l<Nz;l++){
+	
+	
 	phi[0](i,j,l)=0.0;  //A
 	phi[1](i,j,l)=0.0;  //C
 	phi[2](i,j,l)=0.0;  //B1
 	phi[3](i,j,l)=0.0;  //B2
 	phi[4](i,j,l)=0.0;  //B3
-
+	
 	//A1
 	for(s=0;s<(Ns[0]+1);s++){
 	  if(s==0 || s==Ns[0]){

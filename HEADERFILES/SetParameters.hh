@@ -6,14 +6,14 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   double Lx,Ly,Lz;
 
   // Setting chemical potentials
-  mu_homo=-13.7;
+  mu_homo=-30000.0;
   mu_copo=0.0;
 
   // 0 = Read From File    1 = Make Structure
   Iomega=0;
   
   // Minimize with respect to box size (yes=1, No=0)
-  box_min=1;
+  box_min=0;
 
   // Setting the generic chi parameters
   xAB=80.0;
@@ -24,10 +24,10 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   xBhom=0.0;
 
   // Degree of polymerization
-  Ns[0]=20; // A
-  Ns[1]=20; // C
+  Ns[0]=10; // A
+  Ns[1]=10; // C
   Ns[3]=NB_middle; // B2 Center
-  Ns[2]=(200-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
+  Ns[2]=(100-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
   Ns[4]=Ns[2]; // B3
   Ns[5]=10; // B4 (Homopolymer)
 
@@ -44,7 +44,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
 
   // Initial Guess for box dimension
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
-  if(ZnSc==1){ Lx=3.0; Ly=3.0; Lz=3.0;}
+  if(ZnSc==1){ Lx=4.; Ly=4.; Lz=4.;}
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
  
 
@@ -61,6 +61,12 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   fB3=(double)Ns[4]/(double)Ds;// fB3
   kappa=(double)Ns[5]/(double)Ds;// kappa for homopolymer
 
+  std::cout<<fA<<std::endl;
+  std::cout<<fC<<std::endl;
+  std::cout<<fB1<<std::endl;
+  std::cout<<fB2<<std::endl;
+  std::cout<<fB3<<std::endl;
+  
   // Setting up the individual chi values
   chi(0)=xAC;  //xAC
   chi(1)=xAB;  //xAB1

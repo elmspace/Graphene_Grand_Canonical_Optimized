@@ -16,12 +16,10 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   for(i=0;i<Nx;i++){
     for(j=0;j<Ny;j++){
       for(k=0;k<Nz;k++){
-	phi_w[0](i,j,k)=0.0;
-	phi_w[1](i,j,k)=0.0;
-	phi_w[2](i,j,k)=0.0;
-	phi_w[3](i,j,k)=0.0;
-	phi_w[4](i,j,k)=0.0;
-	phi_w[5](i,j,k)=0.0;
+	for(ii=0;ii<ChainType;ii++){
+	  phi_w[ii](i,j,k)=0.0;
+	  w[ii](i,j,k)=0.0;
+	}
       }
     }
   }
@@ -40,12 +38,17 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     if(AlphaBN==1){infile.open("./OMEGA/READ/phi_AlphaBN_32_32_32.read");}
     if(Bilayer==1){infile.open("./OMEGA/READ/.read");}
     if(CAC==1){infile.open("./OMEGA/READ/phi_CAC_32_32_32.read");}
-    if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
+    // if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
+    if(ZnSc==1){infile.open("./OMEGA/READ/input.dat");}
 
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){
 	for(k=0;k<Nz;k++){
-	  infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
+	  //infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
+	  infile >> phi_w[0](i,j,k) >> junk >> phi_w[1](i,j,k) >> w[0](i,j,k) >> w[2](i,j,k) >> w[1](i,j,k);
+	  //w[2](i,j,k)/=3.0;
+	  //w[3](i,j,k)=w[2](i,j,k);
+	  //w[4](i,j,k)=w[2](i,j,k);
 	}
       }
     }
@@ -128,27 +131,52 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     //++++++++++++++++++++++++++++++++++++              ZnSc
     if(ZnSc==1){
 
+      /*
       // Corners
-      phi_w[0](0,0,0)=1.0;
-      phi_w[0](Nx-1,0,0)=1.0;
-      phi_w[0](0,Ny-1,0)=1.0;
-      phi_w[0](0,0,Nz-1)=1.0;
-      phi_w[0](Nx-1,Ny-1,0)=1.0;
-      phi_w[0](0,Ny-1,Nz-1)=1.0;
-      phi_w[0](Nx-1,0,Nz-1)=1.0;
-      phi_w[0](Nx-1,Ny-1,Nz-1)=1.0;
+      phi_w[0](0,0,0)=100.0;
+      phi_w[0](Nx-1,0,0)=100.0;
+      phi_w[0](0,Ny-1,0)=100.0;
+      phi_w[0](0,0,Nz-1)=100.0;
+      phi_w[0](Nx-1,Ny-1,0)=100.0;
+      phi_w[0](0,Ny-1,Nz-1)=100.0;
+      phi_w[0](Nx-1,0,Nz-1)=100.0;
+      phi_w[0](Nx-1,Ny-1,Nz-1)=100.0;
       // Faces
-      phi_w[0](0,Ny/2,Nz/2)=1.0;
-      phi_w[0](Nx/2,0,Nz/2)=1.0;
-      phi_w[0](Nx/2,Ny/2,0)=1.0;
-      phi_w[0](Nx-1,Ny/2,Nz/2)=1.0;
-      phi_w[0](Nx/2,Ny-1,Nz/2)=1.0;
-      phi_w[0](Nx/2,Ny/2,Nz-1)=1.0;
+      phi_w[0](0,Ny/2,Nz/2)=100.0;
+      phi_w[0](Nx/2,0,Nz/2)=100.0;
+      phi_w[0](Nx/2,Ny/2,0)=100.0;
+      phi_w[0](Nx-1,Ny/2,Nz/2)=100.0;
+      phi_w[0](Nx/2,Ny-1,Nz/2)=100.0;
+      phi_w[0](Nx/2,Ny/2,Nz-1)=100.0;
 
-      phi_w[1](Nx/4,Ny/4,3*Nz/4)=1.0;
-      phi_w[1](Nx/4,3*Ny/4,Nz/4)=1.0;
-      phi_w[1](3*Nx/4,Ny/4,Nz/4)=1.0;
-      phi_w[1](3*Nx/4,3*Ny/4,3*Nz/4)=1.0;
+      phi_w[1](Nx/4,Ny/4,3*Nz/4)=1000.0;
+      phi_w[1](Nx/4,3*Ny/4,Nz/4)=1000.0;
+      phi_w[1](3*Nx/4,Ny/4,Nz/4)=1000.0;
+      phi_w[1](3*Nx/4,3*Ny/4,3*Nz/4)=1000.0;
+      */
+
+      junk=-200.0;
+      // Corners
+      w[0](0,0,0)=junk;
+      w[0](Nx-1,0,0)=junk;
+      w[0](0,Ny-1,0)=junk;
+      w[0](0,0,Nz-1)=junk;
+      w[0](Nx-1,Ny-1,0)=junk;
+      w[0](0,Ny-1,Nz-1)=junk;
+      w[0](Nx-1,0,Nz-1)=junk;
+      w[0](Nx-1,Ny-1,Nz-1)=junk;
+      // Faces
+      w[0](0,Ny/2,Nz/2)=junk;
+      w[0](Nx/2,0,Nz/2)=junk;
+      w[0](Nx/2,Ny/2,0)=junk;
+      w[0](Nx-1,Ny/2,Nz/2)=junk;
+      w[0](Nx/2,Ny-1,Nz/2)=junk;
+      w[0](Nx/2,Ny/2,Nz-1)=junk;
+
+      w[1](Nx/4,Ny/4,3*Nz/4)=junk;
+      w[1](Nx/4,3*Ny/4,Nz/4)=junk;
+      w[1](3*Nx/4,Ny/4,Nz/4)=junk;
+      w[1](3*Nx/4,3*Ny/4,3*Nz/4)=junk;
       
         
     }
@@ -227,7 +255,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 
 
 
-
+  /*
 
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -247,7 +275,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
+  */
 
   
  

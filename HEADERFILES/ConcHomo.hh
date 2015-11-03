@@ -15,7 +15,7 @@ double ConcHomo(std::vector<double_array> &phi,std::vector<double_array> &w, int
       }
     }
   }
-  solveModDiffEqn_FFT(qB4,w[5],qintB4,ds,Ns[5],1,k_vector,dxyz);
+  solveModDiffEqn_FFT_Forward(qB4,w[5],qintB4,ds,Ns[5],1,k_vector,dxyz);
 
   //++++++++++++++++++++++++++++++++++++++Single Chain Partition Function+++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

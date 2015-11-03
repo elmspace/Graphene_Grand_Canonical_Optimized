@@ -1,4 +1,4 @@
-LFLAGS = -lm -lfftw3  -O3
+LFLAGS = -lm -lfftw3  -O3 -lfftw3_threads -fopenmp -lpthread
 DEBUG = -g
 LIBS = -lm -lstdc++ -lfftw3
 
