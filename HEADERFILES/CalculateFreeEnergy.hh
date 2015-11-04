@@ -106,7 +106,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
       }
       */
 
-      AndersonMixing(w,newW,dxyz);
+      AndersonMixing(w,newW,delW,dxyz);
 
       //if(Test==1){
       SaveData(phi,w,dxyz);

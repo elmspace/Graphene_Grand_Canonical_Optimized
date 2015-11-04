@@ -51,7 +51,16 @@ int main(int argc, char* argv[]){
   {
 	w.push_back(double_array(Nx,Ny,Nz));
 	phi.push_back(double_array(Nx,Ny,Nz));
-  }  
+  }
+
+ 
+  DW.reserve(History);
+  for(int n=0; n<History; n++) 
+    {
+      DW.push_back(double_array(Nx,Ny,Nz));
+    }
+  
+  
   Ns=new int[ChainType];
   int i;
   double  ds;

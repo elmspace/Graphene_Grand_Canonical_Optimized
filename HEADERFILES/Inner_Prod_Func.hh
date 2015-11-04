@@ -37,6 +37,11 @@ double Inner_Prod_Func(double_array &f1, double_array &f2, double_array &f3, dou
     }
   }
   
+  // Setting to zero, if number is too small
+  if(abs(result)<1.0e-20){
+    result = 0.0;
+  }
+
 
   return result;
   

@@ -58,3 +58,4 @@ fftw_plan forward_plan_dag, inverse_plan_dag;
 
 typedef array_t<double> double_array;
 
+std::vector<double_array> DW;
