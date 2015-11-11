@@ -2,6 +2,7 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
 
   int i, j ,k;
 
+  std::cout<<"Saving data . . ."<<std::endl;
 
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting Phi for Matlab plotting
   std::string xyz="./MATLAB/xyz.dat";

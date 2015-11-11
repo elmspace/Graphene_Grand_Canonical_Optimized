@@ -23,11 +23,13 @@ using namespace std;
 #define Nz 32
 
 // this is used for Andersion Mixing
+int Anderson = 0;
 int const History = 4;
 
+
 // Updating parameters
-double epsilon_delomega = 0.07;
-double epsilon_delphi = 0.07;
+double epsilon_delomega = 0.05;
+double epsilon_delphi = 0.05;
 
 // Number of polymer species
 #define ChainType 6
@@ -58,5 +60,6 @@ fftw_plan forward_plan_dag, inverse_plan_dag;
 
 typedef array_t<double> double_array;
 
+// Parameters used for Anderson Mixing
 double ****DW_0,****DW_1,****DW_2,****DW_3,****DW_4,****DW_5;
 double ****W_0,****W_1,****W_2,****W_3,****W_4,****W_5;

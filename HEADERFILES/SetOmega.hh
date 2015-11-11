@@ -41,11 +41,11 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     // if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
     if(ZnSc==1){infile.open("./OMEGA/READ/input.dat");}
 
-    for(i=0;i<Nx;i++){
-      for(j=0;j<Ny;j++){
-	for(k=0;k<Nz;k++){
-	  //infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
-	  infile >> phi_w[0](i,j,k) >> junk >> phi_w[1](i,j,k) >> w[0](i,j,k) >> w[2](i,j,k) >> w[1](i,j,k);
+    for(i=0;i<Nx;i+=1){
+      for(j=0;j<Ny;j+=1){
+	for(k=0;k<Nz;k+=1){
+	  infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
+	  //infile >> phi_w[0](i,j,k) >> junk >> phi_w[1](i,j,k) >> w[0](i,j,k) >> w[2](i,j,k) >> w[1](i,j,k);
 	  //w[2](i,j,k)/=3.0;
 	  //w[3](i,j,k)=w[2](i,j,k);
 	  //w[4](i,j,k)=w[2](i,j,k);
@@ -251,12 +251,6 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   }
 
 
-
-
-
-
-  /*
-
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Setting the omega field from the input phi
@@ -275,7 +269,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  */
+
 
   
  

@@ -13,7 +13,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   Iomega=0;
   
   // Minimize with respect to box size (yes=1, No=0)
-  box_min=0;
+  box_min=1;
 
   // Setting the generic chi parameters
   xAB=80.0;

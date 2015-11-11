@@ -53,7 +53,8 @@ int main(int argc, char* argv[]){
 	phi.push_back(double_array(Nx,Ny,Nz));
   }
 
- 
+
+  // Anderson Mixing Parameters *******************************
   DW_0 = create_4d_double_array(History,Nx,Ny,Nz,"DW_0");
   DW_1 = create_4d_double_array(History,Nx,Ny,Nz,"DW_1");
   DW_2 = create_4d_double_array(History,Nx,Ny,Nz,"DW_2");
@@ -61,13 +62,13 @@ int main(int argc, char* argv[]){
   DW_4 = create_4d_double_array(History,Nx,Ny,Nz,"DW_4");
   DW_5 = create_4d_double_array(History,Nx,Ny,Nz,"DW_5");
 
-
   W_0 = create_4d_double_array(History,Nx,Ny,Nz,"W_0");
   W_1 = create_4d_double_array(History,Nx,Ny,Nz,"W_1");
   W_2 = create_4d_double_array(History,Nx,Ny,Nz,"W_2");
   W_3 = create_4d_double_array(History,Nx,Ny,Nz,"W_3");
   W_4 = create_4d_double_array(History,Nx,Ny,Nz,"W_4");
   W_5 = create_4d_double_array(History,Nx,Ny,Nz,"W_5");
+  // ***********************************************************
 
 
   

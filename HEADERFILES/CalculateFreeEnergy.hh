@@ -89,28 +89,15 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
       deltafE=fabs(currentfE-oldfE_iter);
 
-      std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
       oldfE_iter=currentfE;
 
-      /*
-      for(i=0;i<Nx;i++){
-	for(j=0;j<Ny;j++){
-	  for(k=0;k<Nz;k++){
+      // Calculating the new omega fields
+      AndersonMixing(w,newW,delW,delphi,dxyz);
 
-	    for(chain=0;chain<ChainType;chain++){
-	      w[chain](i,j,k)+=(epsilon_delomega*delW[chain](i,j,k)-epsilon_delphi*delphi(i,j,k));
-	    }
-
-	  }
-	}
+      if(Test==1){
+	std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
+	if(iter%10==0){SaveData(phi,w,dxyz);}
       }
-      */
-
-      AndersonMixing(w,newW,delW,dxyz);
-
-      //if(Test==1){
-      SaveData(phi,w,dxyz);
-      //}
 
       iter++;
     }while((deltaW>precision) || (iter<maxIter));
