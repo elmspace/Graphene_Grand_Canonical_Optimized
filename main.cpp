@@ -1,4 +1,4 @@
-
+#define ARRAY_SIZE(array) (sizeof((array))/sizeof((array[0])))
 #include "./global.hh"
 #include "./HEADERFILES/InputArguments.hh"
 #include "./HEADERFILES/SetParameters.hh"                             
@@ -54,12 +54,22 @@ int main(int argc, char* argv[]){
   }
 
  
-  DW.reserve(History);
-  for(int n=0; n<History; n++) 
-    {
-      DW.push_back(double_array(Nx,Ny,Nz));
-    }
-  
+  DW_0 = create_4d_double_array(History,Nx,Ny,Nz,"DW_0");
+  DW_1 = create_4d_double_array(History,Nx,Ny,Nz,"DW_1");
+  DW_2 = create_4d_double_array(History,Nx,Ny,Nz,"DW_2");
+  DW_3 = create_4d_double_array(History,Nx,Ny,Nz,"DW_3");
+  DW_4 = create_4d_double_array(History,Nx,Ny,Nz,"DW_4");
+  DW_5 = create_4d_double_array(History,Nx,Ny,Nz,"DW_5");
+
+
+  W_0 = create_4d_double_array(History,Nx,Ny,Nz,"W_0");
+  W_1 = create_4d_double_array(History,Nx,Ny,Nz,"W_1");
+  W_2 = create_4d_double_array(History,Nx,Ny,Nz,"W_2");
+  W_3 = create_4d_double_array(History,Nx,Ny,Nz,"W_3");
+  W_4 = create_4d_double_array(History,Nx,Ny,Nz,"W_4");
+  W_5 = create_4d_double_array(History,Nx,Ny,Nz,"W_5");
+
+
   
   Ns=new int[ChainType];
   int i;
@@ -119,6 +129,18 @@ int main(int argc, char* argv[]){
   //--------------------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------
+  destroy_4d_double_array(DW_0);
+  destroy_4d_double_array(DW_1);
+  destroy_4d_double_array(DW_2);
+  destroy_4d_double_array(DW_3);
+  destroy_4d_double_array(DW_4);
+  destroy_4d_double_array(DW_5);
+  destroy_4d_double_array(W_0);
+  destroy_4d_double_array(W_1);
+  destroy_4d_double_array(W_2);
+  destroy_4d_double_array(W_3);
+  destroy_4d_double_array(W_4);
+  destroy_4d_double_array(W_5);
   fftw_free(input_q);
   fftw_free(transformed_q);
   fftw_free(final_q);

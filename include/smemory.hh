@@ -371,3 +371,50 @@ void destroy_4d_double_array(double ****array)
   	sfree(array[0]);
   	sfree(array);
 }
+
+
+
+
+double *****create_5d_double_array(int n1, int n2, int n3, int n4, int n5, const char *name){
+
+  int i,j,k,l;
+  
+  double *data = (double *) smalloc(n1*n2*n3*n4*n5*sizeof(double),name);
+  double **cube = (double **) smalloc(n1*n2*n3*n4*sizeof(double *),name);
+  double ***plane = (double ***) smalloc(n1*n2*n3*sizeof(double **),name);
+  double ****boss = (double ****) smalloc(n1*n2*sizeof(double ***),name);
+  double *****array = (double *****) smalloc(n1*sizeof(double ****),name);
+  
+  int n = 0;
+  for (i = 0; i < n1; i++) {
+    array[i] = &boss[i*n2];
+    
+    for (j = 0; j < n2; j++) {
+      boss[i*n2+j] = &plane[(i*n2+j)*n3];
+      
+      for (k = 0; k < n3; k++) {
+	plane[(i*n2+j)*n3+k] = &cube[(i*n2*n3+j*n3+k)*n4];
+	
+	for(l = 0; n < n4 ; l++){
+	  cube[(i*n2*n3+j*n3+k)*n4+l] = &data[n];
+	  n += n5;
+	}
+	
+      }
+    }
+  }
+  return array;
+}
+
+
+void destroy_5d_double_array(double *****array)
+{
+  	if (array == NULL) return;
+	sfree(array[0][0][0][0]);
+  	sfree(array[0][0][0][0]);
+  	sfree(array[0][0][0]);
+  	sfree(array[0][0]);
+	sfree(array[0]);
+  	sfree(array);
+}
+
