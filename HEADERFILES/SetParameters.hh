@@ -10,24 +10,24 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   mu_copo=0.0;
 
   // 0 = Read From File    1 = Make Structure
-  Iomega=0;
+  Iomega=1;
   
   // Minimize with respect to box size (yes=1, No=0)
   box_min=1;
 
   // Setting the generic chi parameters
-  xAB=80.0;
-  xAC=80.0;
-  xBC=80.0;
+  xAB=0.0;
+  xAC=20.0;
+  xBC=0.0;
   xAhom=0.0;
   xChom=0.0;
   xBhom=0.0;
 
   // Degree of polymerization
-  Ns[0]=10; // A
-  Ns[1]=10; // C
+  Ns[0]=100; // A
+  Ns[1]=100; // C
   Ns[3]=NB_middle; // B2 Center
-  Ns[2]=(100-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
+  Ns[2]=(203-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
   Ns[4]=Ns[2]; // B3
   Ns[5]=10; // B4 (Homopolymer)
 
@@ -38,9 +38,9 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   ds=1.0/Ds;
   
   // Setting box size
-  Lx=4;
-  Ly=4;
-  Lz=4;
+  Lx=4.0;
+  Ly=4.0;
+  Lz=4.0;
 
   // Initial Guess for box dimension
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}

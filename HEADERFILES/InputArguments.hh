@@ -17,6 +17,8 @@ void inputArguments(int numb_of_args, char* arg_input[]){
     ZnSc=1;
   }else if(strcmp( arg_input[1], "C") == 0){
     CAC=1;
+  }else if(strcmp( arg_input[1], "L") == 0){
+    LAM=1;
   }else{
     std::cout<<"The phase you have chosen does not exists!"<<std::endl;
     exit(1);
