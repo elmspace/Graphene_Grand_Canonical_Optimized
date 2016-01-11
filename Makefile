@@ -1,6 +1,6 @@
-LFLAGS = -lm -lfftw3  -O3 -lfftw3_threads -fopenmp -lpthread
+LFLAGS = -lm -lfftw3  -O3 -lfftw3_threads -fopenmp -llapack -lblas -lgfortran
 DEBUG = -g
 LIBS = -lm -lstdc++ -lfftw3 -llapack
 
 main: main.cpp
-	g++ -std=c++0x $(LFLAGS) -o dgetrf dgetrf.c $@ $(MOBLIB) $(SUBFILES) main.cpp $(LIBS)
+	g++ -std=c++11 $(LFLAGS) -o $@ $(MOBLIB) $(SUBFILES) main.cpp $(LIBS)

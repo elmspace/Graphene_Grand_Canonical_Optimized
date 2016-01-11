@@ -35,20 +35,18 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 
     // ** Read the phi, and not omega, it is more stable
     std::ifstream infile;
-    if(AlphaBN==1){infile.open("./OMEGA/READ/phi_AlphaBN_32_32_32.read");}
+    if(AlphaBN==1){infile.open("./OMEGA/READ/omega_AlphaBN_32_32_32.read");}
     if(Bilayer==1){infile.open("./OMEGA/READ/.read");}
     if(CAC==1){infile.open("./OMEGA/READ/phi_CAC_32_32_32.read");}
-    // if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
-    if(ZnSc==1){infile.open("./OMEGA/READ/input.dat");}
+    if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
+    if(LAM==1){infile.open("./OMEGA/READ/omega_LAM_32_32_32.read");}
+
 
     for(i=0;i<Nx;i+=1){
       for(j=0;j<Ny;j+=1){
 	for(k=0;k<Nz;k+=1){
-	  infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
-	  //infile >> phi_w[0](i,j,k) >> junk >> phi_w[1](i,j,k) >> w[0](i,j,k) >> w[2](i,j,k) >> w[1](i,j,k);
-	  //w[2](i,j,k)/=3.0;
-	  //w[3](i,j,k)=w[2](i,j,k);
-	  //w[4](i,j,k)=w[2](i,j,k);
+	  //infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
+	  infile >> ii >> jj >> kk >> w[0](i,j,k) >> w[1](i,j,k) >> w[2](i,j,k) >> w[3](i,j,k) >> w[4](i,j,k) >> w[5](i,j,k);
 	}
       }
     }
@@ -250,7 +248,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 
   }
 
-
+  /*
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Setting the omega field from the input phi
@@ -268,8 +266,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
   }
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
+  */
 
   
  

@@ -1,13 +1,17 @@
-//#include </usr/local/include/fftw3.h>  // This is for My Mac Pro
-#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet
+#include </usr/local/include/fftw3.h>  // This is for My Mac Pro
+//#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet
 //#include </usr/include/fftw3.h> // This is for use on Landua
 //#include </usr/local/include/fftw3.h> // This is for elmspace2
+
+// These were use for the Anderson Mixing section
+//#include </System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/Headers/cblas.h>
+//#include </System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/Headers/clapack.h>
 
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
-#include <stdlib.h> 
-#include <math.h> 
+#include <stdlib.h>
+#include <math.h>
 #include <time.h>
 #include "./include/smemory.hh"
 #include <vector>
@@ -24,22 +28,28 @@ using namespace std;
 
 // this is used for Andersion Mixing
 int Anderson = 0;
-int const History = 4;
+int const History = 2;
 
 
 // Updating parameters
-double epsilon_delomega = 0.07;
-double epsilon_delphi = 0.07;
+double epsilon_delomega = 0.05;
+double epsilon_delphi = 0.05;
+double epsilon_delomega_anderson;
 
 // Number of polymer species
 #define ChainType 6
 
+// SCFT precision
+double  precision=1.0e-4;
+
 int Iomega;
 int box_min;
 int Test;
+int iter;
 int AlphaBN, Bilayer, CAC, CsCl, ZnSc;
 int LAM, HEX, BCC;
-int global_index;
+int global_index = 0;
+double  deltaW;
 
 int NB_middle;
 double kappa;
@@ -61,5 +71,5 @@ fftw_plan forward_plan_dag, inverse_plan_dag;
 typedef array_t<double> double_array;
 
 // Parameters used for Anderson Mixing
-double ****DW_0,****DW_1,****DW_2,****DW_3,****DW_4,****DW_5;
-double ****W_0,****W_1,****W_2,****W_3,****W_4,****W_5;
+double *****DW;
+double *****W;

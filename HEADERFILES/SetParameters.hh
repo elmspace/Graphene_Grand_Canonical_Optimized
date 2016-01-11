@@ -10,26 +10,26 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   mu_copo=0.0;
 
   // 0 = Read From File    1 = Make Structure
-  Iomega=1;
+  Iomega=0;
   
   // Minimize with respect to box size (yes=1, No=0)
-  box_min=1;
+  box_min=0;
 
   // Setting the generic chi parameters
-  xAB=0.0;
-  xAC=20.0;
-  xBC=0.0;
-  xAhom=0.0;
-  xChom=0.0;
-  xBhom=0.0;
+  xAB=80.0;
+  xAC=80.0;
+  xBC=80.0;
+  xAhom=0.01;
+  xChom=0.01;
+  xBhom=0.01;
 
   // Degree of polymerization
-  Ns[0]=100; // A
-  Ns[1]=100; // C
+  Ns[0]=10; // A
+  Ns[1]=10; // C
   Ns[3]=NB_middle; // B2 Center
-  Ns[2]=(203-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
+  Ns[2]=(100-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
   Ns[4]=Ns[2]; // B3
-  Ns[5]=10; // B4 (Homopolymer)
+  Ns[5]=2; // B4 (Homopolymer)
 
   // Total length
   Ds=Ns[0]+Ns[1]+Ns[2]+Ns[3]+Ns[4];
@@ -61,11 +61,11 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   fB3=(double)Ns[4]/(double)Ds;// fB3
   kappa=(double)Ns[5]/(double)Ds;// kappa for homopolymer
 
-  std::cout<<fA<<std::endl;
-  std::cout<<fC<<std::endl;
-  std::cout<<fB1<<std::endl;
-  std::cout<<fB2<<std::endl;
-  std::cout<<fB3<<std::endl;
+  std::cout<<"fA= "<<fA<<std::endl;
+  std::cout<<"fC= "<<fC<<std::endl;
+  std::cout<<"fB1= "<<fB1<<std::endl;
+  std::cout<<"fB2= "<<fB2<<std::endl;
+  std::cout<<"fB3= "<<fB3<<std::endl;
   
   // Setting up the individual chi values
   chi(0)=xAC;  //xAC
@@ -77,10 +77,10 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   chi(6)=xBC;  //xCB2
   chi(7)=xBC;  //xCB3
   chi(8)=xChom;  //xCB4
-  chi(9)=0.0;  //xB1B2
-  chi(10)=0.0; //xB1B3
+  chi(9)=0.001;  //xB1B2
+  chi(10)=0.001; //xB1B3
   chi(11)=xBhom; //xB1B4
-  chi(12)=0.0; //xB2B3
+  chi(12)=0.001; //xB2B3
   chi(13)=xBhom; //xB2B4
   chi(14)=xBhom; //xB3B4
   // Setting up the chi matrix in this case 8 by 8
