@@ -75,8 +75,7 @@ double homogenousfE(double_array &chiMatrix, double_array &chi){
     iter++;
     
   }while(iter<Iter);
-
-
+  
   if(abs(dW)>0.0001){
     std::cout<<"The homogenous free energy did not converege!"<<std::endl;
     exit(-1);

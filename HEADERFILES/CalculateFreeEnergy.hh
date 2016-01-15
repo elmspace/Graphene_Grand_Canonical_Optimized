@@ -23,7 +23,7 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
   }
 
   // Calculating the Homogenous Free Energy
-  fE_homo=homogenousfE(chiMatrix,chi);
+  //fE_homo=homogenousfE(chiMatrix,chi);
 
   std::cout<<"Dis Copolymer Concentration:  "<<Phi_Copo_Dis<<"  Dis Homopolymer Concentration:   "<<Phi_Homo_Dis<<std::endl;
 
@@ -95,7 +95,8 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
       fEW/=(((Nx*dxyz(0))*(Ny*dxyz(1))*(Nz*dxyz(2))));
       fES=QMultiBlock+activity*QHomo;
 
-      currentfE=-fES-fEW+fEchi-fE_homo;
+      //currentfE=-fES-fEW+fEchi-fE_homo;
+      currentfE=-fES-fEW+fEchi;
 
       deltafE=fabs(currentfE-oldfE_iter);
 

@@ -19,9 +19,9 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   xAB=80.0;
   xAC=80.0;
   xBC=80.0;
-  xAhom=0.01;
-  xChom=0.01;
-  xBhom=0.01;
+  xAhom=80.0;
+  xChom=80.0;
+  xBhom=0.0;
 
   // Degree of polymerization
   Ns[0]=10; // A
@@ -29,7 +29,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   Ns[3]=NB_middle; // B2 Center
   Ns[2]=(100-(Ns[0]+Ns[1]+Ns[3]))/2; // B1
   Ns[4]=Ns[2]; // B3
-  Ns[5]=2; // B4 (Homopolymer)
+  Ns[5]=100; // B4 (Homopolymer)
 
   // Total length
   Ds=Ns[0]+Ns[1]+Ns[2]+Ns[3]+Ns[4];

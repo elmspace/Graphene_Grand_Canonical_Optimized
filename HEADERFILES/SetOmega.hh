@@ -47,6 +47,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 	for(k=0;k<Nz;k+=1){
 	  //infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
 	  infile >> ii >> jj >> kk >> w[0](i,j,k) >> w[1](i,j,k) >> w[2](i,j,k) >> w[3](i,j,k) >> w[4](i,j,k) >> w[5](i,j,k);
+	  w[5](i,j,k) = 0.0;
 	}
       }
     }

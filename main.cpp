@@ -26,6 +26,7 @@
 #include "./HEADERFILES/CalculateFreeEnergy.hh"
 #include <vector>
 #include "./MODS/Mod1.hh"
+#include "./MODS/Mod0.hh"
 
 using namespace std;
 
@@ -105,6 +106,7 @@ int main(int argc, char* argv[]){
   inputArguments(argc,argv);
 
   Mod1(w,phi,eta,Ns,ds,k_vector,chi,dxyz,chiMatrix);
+  //Mod0(w,phi,eta,Ns,ds,k_vector,chi,dxyz,chiMatrix);
 
   //--------------------------------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------
