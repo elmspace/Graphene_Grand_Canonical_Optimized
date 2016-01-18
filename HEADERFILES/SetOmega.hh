@@ -36,6 +36,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     // ** Read the phi, and not omega, it is more stable
     std::ifstream infile;
     if(AlphaBN==1){infile.open("./OMEGA/READ/omega_AlphaBN_32_32_32.read");}
+    if(AlphaBNBilayer==1){infile.open("./OMEGA/READ/omega_AlphaBN_Bilayer_32_32_32.read");}
     if(Bilayer==1){infile.open("./OMEGA/READ/.read");}
     if(CAC==1){infile.open("./OMEGA/READ/phi_CAC_32_32_32.read");}
     if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
@@ -47,12 +48,39 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 	for(k=0;k<Nz;k+=1){
 	  //infile >> ii >> jj >> kk >> phi_w[0](i,j,k) >> phi_w[1](i,j,k) >> phi_w[2](i,j,k) >> phi_w[3](i,j,k) >> phi_w[4](i,j,k) >> phi_w[5](i,j,k);
 	  infile >> ii >> jj >> kk >> w[0](i,j,k) >> w[1](i,j,k) >> w[2](i,j,k) >> w[3](i,j,k) >> w[4](i,j,k) >> w[5](i,j,k);
-	  w[5](i,j,k) = 0.0;
 	}
       }
     }
     infile.close();
-    
+
+    /*
+    for(i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=0;k<(Nz/2 - 5);k++){
+	  w[0](i,j,k)=0.0;
+	  w[1](i,j,k)=0.0;
+	  w[2](i,j,k)=0.0;
+	  w[3](i,j,k)=0.0;
+	  w[4](i,j,k)=0.0;
+	  w[5](i,j,k)=-15.0;
+	}
+      }
+    }
+
+    for(i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=(Nz/2 + 5);k<Nz;k++){
+	  w[0](i,j,k)=0.0;
+	  w[1](i,j,k)=0.0;
+	  w[2](i,j,k)=0.0;
+	  w[3](i,j,k)=0.0;
+	  w[4](i,j,k)=0.0;
+	  w[5](i,j,k)=-15.0;
+	}
+      }
+    }
+    */
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++         Setting W
   }else if(Iomega==1){
@@ -203,7 +231,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++           AlphaBN
     if(AlphaBN==1){
-      
+
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  for(k=0;k<4;k++){
@@ -219,28 +247,30 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 	  }
 	}
       }
-
-
+ 
       for(i=0;i<Nx;i++){
 	for(j=0;j<Ny;j++){
 	  for(k=(Nz/2-2);k<(Nz/2+3);k++){
-	    phi_w[1](i,j,k)=(cos(2.0*Pi*i/Nx)*cos(2.0*Pi*j/Ny))+1.0; 
+	    phi_w[1](i,j,k)=(cos(2.0*Pi*i/Nx)*cos(2.0*Pi*j/Ny))+1.0;
+	    phi_w[5](i,j,k)=-1.0;
 	  }
 	}
       }
 
-      
-      phi_w[1](Nx/4,0,0)=5.0;
-      phi_w[1](Nx/4,Ny-1,0)=5.0;
-      phi_w[1](3*Nx/4,Ny/2,0)=5.0;
+      for(k=(Nz/2-2);k<(Nz/2+3);k++){
+	phi_w[1](Nx/4,0,0)=5.0;
+	phi_w[1](Nx/4,Ny-1,0)=5.0;
+	phi_w[1](3*Nx/4,Ny/2,0)=5.0;
+	
+	phi_w[1](Nx/4,0,Nz-1)=5.0;
+	phi_w[1](Nx/4,Ny-1,Nz-1)=5.0;
+	phi_w[1](3*Nx/4,Ny/2,Nz-1)=5.0;
+	
+	phi_w[0](Nx/4,0,k)=5.0;
+	phi_w[0](Nx/4,Ny-1,k)=5.0;
+	phi_w[0](3*Nx/4,Ny/2,k)=5.0;
+      }
 
-      phi_w[1](Nx/4,0,Nz-1)=5.0;
-      phi_w[1](Nx/4,Ny-1,Nz-1)=5.0;
-      phi_w[1](3*Nx/4,Ny/2,Nz-1)=5.0;
-
-      phi_w[0](Nx/4,0,Nz/2)=5.0;
-      phi_w[0](Nx/4,Ny-1,Nz/2)=5.0;
-      phi_w[0](3*Nx/4,Ny/2,Nz/2)=5.0;
       
     }
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -248,6 +278,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 
 
   }
+
 
   /*
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

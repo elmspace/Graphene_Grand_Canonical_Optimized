@@ -17,7 +17,7 @@ void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_a
   Test = 1;
 
   parameters(chi,ds,Ns,dxyz,chiMatrix);
-  mu_homo=-13.5;
+  mu_homo=-12.9;
   mu_copo=0.0;
   activity=(1.0/kappa)*exp(kappa*(mu_homo - mu_copo));
   

@@ -3,6 +3,7 @@ void inputArguments(int numb_of_args, char* arg_input[]){
 
   //Set all phase type to 0
   AlphaBN=0;
+  AlphaBNBilayer=0;
   CAC=0;
   CsCl=0;
   ZnSc=0;
@@ -13,6 +14,8 @@ void inputArguments(int numb_of_args, char* arg_input[]){
   
   if(strcmp( arg_input[1], "A") == 0){
     AlphaBN=1;
+  }else if(strcmp( arg_input[1], "AB") == 0){
+    AlphaBNBilayer=1;
   }else if(strcmp( arg_input[1], "Z") == 0){
     ZnSc=1;
   }else if(strcmp( arg_input[1], "C") == 0){

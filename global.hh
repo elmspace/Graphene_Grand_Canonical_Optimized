@@ -46,7 +46,7 @@ int Iomega;
 int box_min;
 int Test;
 int iter;
-int AlphaBN, Bilayer, CAC, CsCl, ZnSc;
+int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc;
 int LAM, HEX, BCC;
 int global_index = 0;
 double  deltaW;

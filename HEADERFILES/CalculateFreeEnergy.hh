@@ -1,6 +1,6 @@
 void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, double_array &eta, int *Ns, double ds, double_array &k_vector, double_array &chi, double_array &dxyz, double_array &chiMatrix){
 
-  int     maxIter=500;
+  int     maxIter=250;
   int     i,j,k,chain,ii,jj;
   int     box_minimize = 1;
   double  currentfE, oldfE, deltafE, oldfE_iter;
