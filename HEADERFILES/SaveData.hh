@@ -1,4 +1,4 @@
-void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, double_array &dxyz){
+void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, double_array &dxyz, int index){
 
   int i, j ,k;
 
@@ -23,7 +23,7 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
   }
   outputFile2.close();
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+  
 
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting omega for read-in later
   std::string omega="./OMEGA/RUN_TIME_DATA/omega.dat";
@@ -112,6 +112,51 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
   }
   outputFile10.close();
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+  // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  // This is mu specific for when we are calculating over a number of mu values
+  if(index == 1){
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting Phi for Matlab plotting **(mu specific)**
+    std::string xyz="./MATLAB/xyz"+std::to_string(mu_homo)+".dat";
+    std::string ABCD="./MATLAB/ABCD"+std::to_string(mu_homo)+".dat"; 
+    
+    std::ofstream outputFile11(xyz);
+    for (i=0;i<Nx;i++){
+      outputFile11<<i*dxyz(0)<<" "<<i*dxyz(1)<<" "<<i*dxyz(2)<<std::endl;
+    }
+    outputFile11.close();  
+    std::ofstream outputFile12(ABCD);
+    for (i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
+	  outputFile12<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	}
+      }
+    }
+    outputFile12.close();
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting omega for read-in later **(mu specific)**
+    std::string omega="./OMEGA/RUN_TIME_DATA/omega"+std::to_string(mu_homo)+".dat";
+    std::ofstream outputFile13(omega);
+    for(i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=0;k<Nz;k++){
+	  outputFile13 <<i<<" "<<j<<" "<<k<< " "<<w[0](i,j,k)<<" "<<w[1](i,j,k)<<" "<<w[2](i,j,k)<<" "<<w[3](i,j,k)<<" "<<w[4](i,j,k)<< " "<<w[5](i,j,k)<<std::endl;
+	}
+      }
+    }
+    outputFile13.close();
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+    
+  }
+ 
+  
 
 };
 

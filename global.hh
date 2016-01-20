@@ -32,8 +32,8 @@ int const History = 2;
 
 
 // Updating parameters
-double epsilon_delomega = 0.05;
-double epsilon_delphi = 0.05;
+double epsilon_delomega = 0.01;
+double epsilon_delphi = 0.01;
 double epsilon_delomega_anderson;
 
 // Number of polymer species

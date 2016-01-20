@@ -49,7 +49,6 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   if(AlphaBNBilayer==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
 
  
-
   // dx, dy, dz step size
   dxyz(0)=Lx/Nx;
   dxyz(1)=Ly/Ny;

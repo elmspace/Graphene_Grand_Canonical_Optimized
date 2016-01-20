@@ -108,13 +108,13 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
       if(Test==1){
 	std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
-	if(iter%10==0){SaveData(phi,w,dxyz);}
+	if(iter%10==0){SaveData(phi,w,dxyz,0);}
       }
 
       iter++;
     }while((deltaW>precision) || (iter<maxIter));
 
-    SaveData(phi,w,dxyz);
+    SaveData(phi,w,dxyz,0);
 
     outputFile <<currentfE<<" "<<fE_homo<<" "<<dxyz(0)*Nx<<" "<<dxyz(1)*Ny<<" "<<dxyz(2)*Nz<<std::endl;
 
@@ -129,7 +129,6 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
   }while(box_minimize==1);
 
-  SaveData(phi,w,dxyz);
 
   Free_Energy=currentfE+fE_homo;
   Free_Energy_Homo=fE_homo;
