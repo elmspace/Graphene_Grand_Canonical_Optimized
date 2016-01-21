@@ -24,7 +24,7 @@ using namespace std;
 // Setting Nx Ny Nz grid size
 #define Nx 32
 #define Ny 32
-#define Nz 32
+#define Nz 16
 
 // this is used for Andersion Mixing
 int Anderson = 0;
@@ -40,7 +40,7 @@ double epsilon_delomega_anderson;
 #define ChainType 6
 
 // SCFT precision
-double  precision=1.0e-4;
+double  precision=1.0e-3;
 
 int Iomega;
 int box_min;

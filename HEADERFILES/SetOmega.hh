@@ -36,7 +36,13 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     // ** Read the phi, and not omega, it is more stable
     std::ifstream infile;
     if(AlphaBN==1){infile.open("./OMEGA/READ/omega_AlphaBN_32_32_32.read");}
-    if(AlphaBNBilayer==1){infile.open("./OMEGA/READ/omega_AlphaBN_Bilayer_32_32_32.read");}
+    if(AlphaBNBilayer==1){
+      if(Nz==16){
+	infile.open("./OMEGA/READ/omega_AlphaBN_Bilayer_32_32_16.read");
+      }else{
+	infile.open("./OMEGA/READ/omega_AlphaBN_Bilayer_32_32_32.read");
+      }
+    }
     if(Bilayer==1){infile.open("./OMEGA/READ/.read");}
     if(CAC==1){infile.open("./OMEGA/READ/phi_CAC_32_32_32.read");}
     if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
@@ -51,35 +57,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
 	}
       }
     }
-    infile.close();
-
-    /*
-    for(i=0;i<Nx;i++){
-      for(j=0;j<Ny;j++){
-	for(k=0;k<(Nz/2 - 5);k++){
-	  w[0](i,j,k)=0.0;
-	  w[1](i,j,k)=0.0;
-	  w[2](i,j,k)=0.0;
-	  w[3](i,j,k)=0.0;
-	  w[4](i,j,k)=0.0;
-	  w[5](i,j,k)=-15.0;
-	}
-      }
-    }
-
-    for(i=0;i<Nx;i++){
-      for(j=0;j<Ny;j++){
-	for(k=(Nz/2 + 5);k<Nz;k++){
-	  w[0](i,j,k)=0.0;
-	  w[1](i,j,k)=0.0;
-	  w[2](i,j,k)=0.0;
-	  w[3](i,j,k)=0.0;
-	  w[4](i,j,k)=0.0;
-	  w[5](i,j,k)=-15.0;
-	}
-      }
-    }
-    */
+    infile.close();    
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //++++++++++++++++++++++++++++++++++++         Setting W

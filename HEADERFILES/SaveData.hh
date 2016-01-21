@@ -12,16 +12,31 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
   for (i=0;i<Nx;i++){
     outputFile1<<i*dxyz(0)<<" "<<i*dxyz(1)<<" "<<i*dxyz(2)<<std::endl;
   }
-  outputFile1.close();  
-  std::ofstream outputFile2(ABCD);
-  for (i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
-	outputFile2<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+  outputFile1.close();
+  if(Nz==16){
+    std::ofstream outputFile2(ABCD);
+    for (i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=(Nz-1);k>=0;k--){//format A, C, B1, B2, B3, B4
+	  outputFile2<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	}
+	for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
+	  outputFile2<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	}
       }
     }
+    outputFile2.close();
+  }else{
+    std::ofstream outputFile2(ABCD);
+    for (i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
+	  outputFile2<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	}
+      }
+    }
+    outputFile2.close();
   }
-  outputFile2.close();
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
 
@@ -127,15 +142,30 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
       outputFile11<<i*dxyz(0)<<" "<<i*dxyz(1)<<" "<<i*dxyz(2)<<std::endl;
     }
     outputFile11.close();  
-    std::ofstream outputFile12(ABCD);
-    for (i=0;i<Nx;i++){
-      for(j=0;j<Ny;j++){
-	for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
-	  outputFile12<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+    if(Nz==16){
+      std::ofstream outputFile12(ABCD);
+      for (i=0;i<Nx;i++){
+	for(j=0;j<Ny;j++){
+	  for(k=(Nz-1);k>=0;k--){//format A, C, B1, B2, B3, B4
+	    outputFile12<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	  }
+	  for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
+	    outputFile12<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	  }
 	}
       }
+      outputFile12.close();
+    }else{
+      std::ofstream outputFile12(ABCD);
+      for (i=0;i<Nx;i++){
+	for(j=0;j<Ny;j++){
+	  for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
+	    outputFile12<<phi[0](i,j,k)<<" "<<phi[1](i,j,k)<<" "<<phi[2](i,j,k)<<" "<<phi[3](i,j,k)<<" "<<phi[4](i,j,k)<<" "<<phi[5](i,j,k)<<std::endl;
+	  }
+	}
+      }
+      outputFile12.close();
     }
-    outputFile12.close();
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting omega for read-in later **(mu specific)**

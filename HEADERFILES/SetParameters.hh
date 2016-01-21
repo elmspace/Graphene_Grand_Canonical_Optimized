@@ -46,7 +46,13 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
   if(ZnSc==1){ Lx=4.; Ly=4.; Lz=4.;}
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
-  if(AlphaBNBilayer==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
+  if(AlphaBNBilayer==1){
+    if(Nz==16){
+      Lx=2.4; Ly=4.2; Lz=2.4;
+    }else{
+      Lx=2.4; Ly=4.2; Lz=4.8;
+    }
+  }
 
  
   // dx, dy, dz step size
