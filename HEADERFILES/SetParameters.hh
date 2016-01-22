@@ -48,7 +48,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
   if(AlphaBNBilayer==1){
     if(Nz==16){
-      Lx=2.4; Ly=4.2; Lz=2.4;
+      Lx=2.4; Ly=4.2; Lz=15.8;
     }else{
       Lx=2.4; Ly=4.2; Lz=4.8;
     }

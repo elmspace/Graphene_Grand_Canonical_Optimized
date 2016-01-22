@@ -44,7 +44,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
       }
     }
     if(Bilayer==1){infile.open("./OMEGA/READ/.read");}
-    if(CAC==1){infile.open("./OMEGA/READ/phi_CAC_32_32_32.read");}
+    if(CAC==1){infile.open("./OMEGA/READ/omega_CAC_32_32_32.read");}
     if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
     if(LAM==1){infile.open("./OMEGA/READ/omega_LAM_32_32_32.read");}
 

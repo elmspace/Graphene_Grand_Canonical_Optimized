@@ -24,7 +24,7 @@ using namespace std;
 // Setting Nx Ny Nz grid size
 #define Nx 32
 #define Ny 32
-#define Nz 16
+#define Nz 32
 
 // this is used for Andersion Mixing
 int Anderson = 0;

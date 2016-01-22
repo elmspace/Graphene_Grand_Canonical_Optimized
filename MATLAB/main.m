@@ -48,9 +48,9 @@ clear ii;
 % Thres3old for the isosurf, 
 cutA=0.2;
 cutC=0.2;
-cutB1=1.5;
-cutB2=1.5;
-cutB3=1.5;
+cutB1=0.631;
+cutB2=0.15;
+cutB3=0.631;
 cutB4=0.5;
 
 
@@ -103,8 +103,8 @@ alpha(qB3,0.7);
 
 
 % B4    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-pB4 = patch(isosurface(X,Y,Z,VB4,cutB4),'FaceColor','green','EdgeColor','none');
-qB4 = patch(isocaps(X,Y,Z,VB4,cutB4),'FaceColor','green','EdgeColor', ...
+pB4 = patch(isosurface(X,Y,Z,VB4,cutB4),'FaceColor','yellow','EdgeColor','none');
+qB4 = patch(isocaps(X,Y,Z,VB4,cutB4),'FaceColor','yellow','EdgeColor', ...
            'none');
 alpha(pB4,0.7);
 alpha(qB4,0.7);
