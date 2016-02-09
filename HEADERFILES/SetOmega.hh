@@ -160,7 +160,7 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
       phi_w[1](3*Nx/4,3*Ny/4,3*Nz/4)=1000.0;
       */
 
-      junk=-200.0;
+      junk=-20.0;
       // Corners
       w[0](0,0,0)=junk;
       w[0](Nx-1,0,0)=junk;

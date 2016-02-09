@@ -108,8 +108,8 @@ void FreeEnergy(std::vector<double_array> &w, std::vector<double_array> &phi, do
 
       if(Test==1){
 	std::cout<<"Iter="<<iter<<"   dfE="<<currentfE<<"   delW=" << deltaW<<"   pCopo="<<Phi_Copo_Ord<<"   pHom="<<Phi_Homo_Ord<<std::endl;
-	if(iter%10==0){SaveData(phi,w,dxyz,0);}
       }
+      if(iter%100==0){SaveData(phi,w,dxyz,0);}
 
       iter++;
     }while((deltaW>precision) || (iter<maxIter));

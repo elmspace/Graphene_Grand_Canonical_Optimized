@@ -10,7 +10,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   mu_copo=0.0;
 
   // 0 = Read From File    1 = Make Structure
-  Iomega=0;
+  Iomega=1;
   
   // Minimize with respect to box size (yes=1, No=0)
   box_min=0;
@@ -44,7 +44,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
 
   // Initial Guess for box dimension
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
-  if(ZnSc==1){ Lx=4.; Ly=4.; Lz=4.;}
+  if(ZnSc==1){ Lx=4.0; Ly=4.0; Lz=4.0;}
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
   if(AlphaBNBilayer==1){
     if(Nz==16){
