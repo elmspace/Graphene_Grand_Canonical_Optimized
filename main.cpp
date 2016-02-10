@@ -32,8 +32,21 @@ using namespace std;
 
 // The arguments read in are in order:
 // 0-> path (not in use)
-// 1-> Type of phase (A=AlphaBN, Z=ZnCs, C=CAC)
+// 1-> Type of phase (look below for the list)
 // 2-> B2 fraction (Ncopolymer = 200)
+
+
+/*
+  A -> AlphaBN
+  AB -> AlphaBNBilayer
+  Z -> ZnSc
+  C -> CAC
+  L -> Lamellae
+  Zc -> ZnSc
+  Na -> NaCl
+  Cs -> CsCl
+*/
+
 
 int main(int argc, char* argv[]){
 

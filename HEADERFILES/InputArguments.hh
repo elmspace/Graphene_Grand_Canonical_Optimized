@@ -7,6 +7,7 @@ void inputArguments(int numb_of_args, char* arg_input[]){
   CAC=0;
   CsCl=0;
   ZnSc=0;
+  NaCl=0;
   Bilayer=0;
   LAM=0;
   HEX=0;
@@ -24,7 +25,12 @@ void inputArguments(int numb_of_args, char* arg_input[]){
     LAM=1;
   }else if(strcmp( arg_input[1], "Zc") == 0){
     ZnSc=1;
-  }else{
+  }else if(strcmp( arg_input[1], "Na") == 0){
+    NaCl=1;
+  }else if(strcmp( arg_input[1], "Cs") == 0){
+    CsCl=1;
+  }
+  else{
     std::cout<<"The phase you have chosen does not exists!"<<std::endl;
     exit(1);
   }

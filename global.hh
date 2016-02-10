@@ -32,21 +32,21 @@ int const History = 2;
 
 
 // Updating parameters
-double epsilon_delomega = 0.01;
-double epsilon_delphi = 0.01;
+double epsilon_delomega = 0.05;
+double epsilon_delphi = 0.05;
 double epsilon_delomega_anderson;
 
 // Number of polymer species
 #define ChainType 6
 
 // SCFT precision
-double  precision=1.0e-3;
+double  precision=1.0e-5;
 
 int Iomega;
 int box_min;
 int Test;
 int iter;
-int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc;
+int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc, NaCl;
 int LAM, HEX, BCC;
 int global_index = 0;
 double  deltaW;
