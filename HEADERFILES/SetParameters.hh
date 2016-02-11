@@ -47,9 +47,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   if(ZnSc==1){ Lx=4.0; Ly=4.0; Lz=4.0;}
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
   if(NaCl==1){ Lx=3.6; Ly=3.6; Lz=3.6;}
-  if(CsCl==1){ Lx=2.5; Ly=2.5; Lz=2.5;}
-
-  
+  if(CsCl==1){ Lx=2.3; Ly=2.3; Lz=2.3;}
   if(AlphaBNBilayer==1){
     if(Nz==16){
       Lx=2.4; Ly=4.2; Lz=15.8;

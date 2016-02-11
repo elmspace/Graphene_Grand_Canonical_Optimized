@@ -46,8 +46,8 @@ clear j;
 clear k;
 clear ii;
 % Thres3old for the isosurf, 
-cutA=0.5;
-cutC=0.5;
+cutA=0.3;
+cutC=0.3;
 cutB1=0.5;
 cutB2=0.5;
 cutB3=0.5;
