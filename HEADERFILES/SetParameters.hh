@@ -10,7 +10,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   mu_copo=0.0;
 
   // 0 = Read From File    1 = Make Structure
-  Iomega=1;
+  Iomega=0;
   
   // Minimize with respect to box size (yes=1, No=0)
   box_min=1;

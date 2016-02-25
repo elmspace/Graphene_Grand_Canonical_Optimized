@@ -48,8 +48,8 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
     if(LAM==1){infile.open("./OMEGA/READ/omega_LAM_32_32_32.read");}
     if(CsCl==1){infile.open("./OMEGA/READ/omega_CsCl_32_32_32.read");}
-
-
+    if(NaCl==1){infile.open("./OMEGA/READ/omega_NaCl_32_32_32.read");}
+    
     for(i=0;i<Nx;i+=1){
       for(j=0;j<Ny;j+=1){
 	for(k=0;k<Nz;k+=1){

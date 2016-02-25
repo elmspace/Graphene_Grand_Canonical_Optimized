@@ -17,8 +17,6 @@ void inputArguments(int numb_of_args, char* arg_input[]){
     AlphaBN=1;
   }else if(strcmp( arg_input[1], "AB") == 0){
     AlphaBNBilayer=1;
-  }else if(strcmp( arg_input[1], "Z") == 0){
-    ZnSc=1;
   }else if(strcmp( arg_input[1], "C") == 0){
     CAC=1;
   }else if(strcmp( arg_input[1], "L") == 0){

@@ -15,9 +15,9 @@ void size_adjust(std::vector<double_array> &w, std::vector<double_array> &phi, d
   box_z=create_1d_double_array(26,"box_z");
   box_fE=create_1d_double_array(26,"box_fE");
 
-  delx=0.1/Nx;
-  dely=0.1/Ny;
-  delz=0.1/Nz;
+  delx=0.05/Nx;
+  dely=0.05/Ny;
+  delz=0.05/Nz;
   //std::cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
   l=0;
   for(i=-1;i<2;i++){

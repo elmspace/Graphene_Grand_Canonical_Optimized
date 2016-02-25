@@ -1,5 +1,5 @@
-#include </usr/local/include/fftw3.h>  // This is for My Mac Pro
-//#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet
+//#include </usr/local/include/fftw3.h>  // This is for My Mac Pro
+#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet
 //#include </usr/include/fftw3.h> // This is for use on Landua
 //#include </usr/local/include/fftw3.h> // This is for elmspace2
 
@@ -32,15 +32,15 @@ int const History = 2;
 
 
 // Updating parameters
-double epsilon_delomega = 0.05;
-double epsilon_delphi = 0.05;
+double epsilon_delomega = 0.01;
+double epsilon_delphi = 0.01;
 double epsilon_delomega_anderson;
 
 // Number of polymer species
 #define ChainType 6
 
 // SCFT precision
-double  precision=1.0e-5;
+double  precision=1.0e-3;
 
 int Iomega;
 int box_min;

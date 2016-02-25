@@ -39,7 +39,6 @@ using namespace std;
 /*
   A -> AlphaBN
   AB -> AlphaBNBilayer
-  Z -> ZnSc
   C -> CAC
   L -> Lamellae
   Zc -> ZnSc
