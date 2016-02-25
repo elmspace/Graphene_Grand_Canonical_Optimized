@@ -134,8 +134,8 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
   // This is mu specific for when we are calculating over a number of mu values
   if(index == 1){
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting Phi for Matlab plotting **(mu specific)**
-    std::string xyz="./MATLAB/xyz"+std::to_string(mu_homo)+".dat";
-    std::string ABCD="./MATLAB/ABCD"+std::to_string(mu_homo)+".dat"; 
+    std::string xyz="./MATLAB/xyz"+std::to_string(global_index_2)+".dat";
+    std::string ABCD="./MATLAB/ABCD"+std::to_string(global_index_2)+".dat"; 
     
     std::ofstream outputFile11(xyz);
     for (i=0;i<Nx;i++){
@@ -169,7 +169,7 @@ void SaveData(std::vector<double_array> &phi, std::vector<double_array> &w, doub
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   Writting omega for read-in later **(mu specific)**
-    std::string omega="./OMEGA/RUN_TIME_DATA/omega"+std::to_string(mu_homo)+".dat";
+    std::string omega="./OMEGA/RUN_TIME_DATA/omega"+std::to_string(global_index_2)+".dat";
     std::ofstream outputFile13(omega);
     for(i=0;i<Nx;i++){
       for(j=0;j<Ny;j++){

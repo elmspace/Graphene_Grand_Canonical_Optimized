@@ -1,5 +1,5 @@
-//#include </usr/local/include/fftw3.h>  // This is for My Mac Pro
-#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet
+#include </usr/local/include/fftw3.h>  // This is for My Mac Pro
+//#include </opt/sharcnet/fftw/3.3.2/intel/include/fftw3.h> // This is for Sharcnet
 //#include </usr/include/fftw3.h> // This is for use on Landua
 //#include </usr/local/include/fftw3.h> // This is for elmspace2
 
@@ -49,6 +49,7 @@ int iter;
 int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc, NaCl;
 int LAM, HEX, BCC;
 int global_index = 0;
+int global_index_2;
 double  deltaW;
 
 int NB_middle;
