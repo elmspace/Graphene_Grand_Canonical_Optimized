@@ -49,8 +49,9 @@ int iter;
 int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc, NaCl;
 int LAM, HEX, BCC;
 int global_index = 0;
-int global_index_2;
 double  deltaW;
+
+string Phase_Type;
 
 int NB_middle;
 double kappa;
