@@ -7,8 +7,11 @@ void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_a
 
   double del_mu = 0.05;
 
+  // Tag1 and Tag2 are used for naming the output files
+  Tag2 = (long long)(NB_middle);
+  
   // Cleaning specific output file
-  std::string OutPut="./RESULTS/MOD1_"+Phase_Type+"_"+std::to_string(NB_middle)+".dat";
+  std::string OutPut="./RESULTS/MOD1_"+Phase_Type+"_"+std::to_string(Tag2)+".dat";
   std::ofstream outputFile57(OutPut);
   outputFile57 << std::endl;
   outputFile57.close();
@@ -44,7 +47,7 @@ void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_a
 
     // *********************************************
     // Writing to the output file with specific name
-    std::string OutPut="./RESULTS/MOD1_"+Phase_Type+"_"+std::to_string(NB_middle)+".dat";
+    std::string OutPut="./RESULTS/MOD1_"+Phase_Type+"_"+std::to_string(Tag2)+".dat";
     std::ofstream outputFile57(OutPut, ios::app);
     outputFile57 <<kappa<<" "<<mu_homo<<" "<<Phi_Copo_Dis<<" "<<Phi_Homo_Dis<<" "<<Phi_Copo_Ord<<" "<<Phi_Homo_Ord<<" "<<Free_Energy<<" "<<Free_Energy_Homo<<" "<<Lx<<" "<<Ly<<" "<<Lz<<std::endl;
     outputFile57.close();
