@@ -30,6 +30,8 @@ using namespace std;
 int Anderson = 0;
 int const History = 2;
 
+// The following are used for outputting results
+long long Tag1, Tag2;
 
 // Updating parameters
 double epsilon_delomega = 0.01;
@@ -49,6 +51,7 @@ int iter;
 int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc, NaCl;
 int LAM, HEX, BCC;
 int global_index = 0;
+int global_iter;
 double  deltaW;
 
 string Phase_Type;

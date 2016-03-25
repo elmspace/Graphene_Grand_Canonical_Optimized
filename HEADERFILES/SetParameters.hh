@@ -13,7 +13,7 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   Iomega=0;
   
   // Minimize with respect to box size (yes=1, No=0)
-  box_min=1;
+  box_min=0;
 
   // Setting the generic chi parameters
   xAB=80.0;
@@ -50,7 +50,8 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   if(CsCl==1){ Lx=2.3; Ly=2.3; Lz=2.3;}
   if(AlphaBNBilayer==1){
     if(Nz==16){
-      Lx=2.4; Ly=4.2; Lz=15.8;
+      // For fB2=9 mu=-13.2
+      Lx=2.5; Ly=4.25; Lz=4.6;
     }else{
       Lx=2.4; Ly=4.2; Lz=4.8;
     }

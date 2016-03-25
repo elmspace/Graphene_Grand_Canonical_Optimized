@@ -25,14 +25,31 @@ void Junc_Density(double_array &qA,double_array &qC,double_array &qB1,double_arr
   
 
   //+++++++++++++++++++++++++++++ This output is setup for the matlab plotting +++++++++++++++++++  
-  std::ofstream outputFile38("./ABCD_Junc.dat");
-  for (i=0;i<Nx;i++){
-    for(j=0;j<Ny;j++){
-      for(k=0;k<Nz;k++){//format A, C, B1+B2+B3, B4
-	outputFile38<<JB1C(i,j,k)<<" "<<JCB2(i,j,k)<<" "<<JB2A(i,j,k)<<" "<<JAB3(i,j,k)<<std::endl;
-      }}}
-  outputFile38.close();
+  if(Nz==16){
+    std::ofstream outputFile38("./MATLAB/ABCD_Junc.dat");
+    for (i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=(Nz-1);k>=0;k--){//format A, C, B1, B2, B3, B4
+	  outputFile38<<JB1C(i,j,k)<<" "<<JCB2(i,j,k)<<" "<<JB2A(i,j,k)<<" "<<JAB3(i,j,k)<<std::endl;
+	}
+	for(k=0;k<Nz;k++){//format A, C, B1, B2, B3, B4
+	  outputFile38<<JB1C(i,j,k)<<" "<<JCB2(i,j,k)<<" "<<JB2A(i,j,k)<<" "<<JAB3(i,j,k)<<std::endl;
+	}
+      }
+    }
+    outputFile38.close();
+  }else{
+    std::ofstream outputFile38("./MATLAB/ABCD_Junc.dat");
+    for (i=0;i<Nx;i++){
+      for(j=0;j<Ny;j++){
+	for(k=0;k<Nz;k++){
+	  outputFile38<<JB1C(i,j,k)<<" "<<JCB2(i,j,k)<<" "<<JB2A(i,j,k)<<" "<<JAB3(i,j,k)<<std::endl;
+	}
+      }
+    }
+    outputFile38.close();
+  }
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  
+    
 
 };

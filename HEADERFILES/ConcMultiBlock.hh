@@ -201,8 +201,10 @@ double ConcMultiBlock(std::vector<double_array> &phi,std::vector<double_array> &
       }
     }
   }
+
+  if(global_iter%100==0){Junc_Density(qA,qC,qB1,qB2,qB3,qdagA,qdagC,qdagB1,qdagB2,qdagB3,Ns,ds,Q);}
   
-  //Junc_Density(qA,qC,qB1,qB2,qB3,qdagA,qdagC,qdagB1,qdagB2,qdagB3,Ns,ds,Q);
+  
   
 
   return Q;
