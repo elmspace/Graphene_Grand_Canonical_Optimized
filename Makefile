@@ -3,4 +3,4 @@ DEBUG = -g
 LIBS = -lm -lstdc++ -lfftw3 -llapack
 
 main: main.cpp
-	g++ -std=c++11 $(LFLAGS) -o $@ $(MOBLIB) $(SUBFILES) main.cpp $(LIBS)
+	g++ -std=c++0x $(LFLAGS) -o $@ $(MOBLIB) $(SUBFILES) main.cpp $(LIBS)
