@@ -26,6 +26,12 @@ using namespace std;
 #define Ny 32
 #define Nz 32
 
+// 0 = Read From File    1 = Make Structure
+int Iomega=0;
+
+// Minimize with respect to box size (yes=1, No=0)
+int box_min=1;
+
 // this is used for Andersion Mixing
 int Anderson = 0;
 int const History = 2;
@@ -44,11 +50,17 @@ double epsilon_delomega_anderson;
 // SCFT precision
 double  precision=1.0e-3;
 
-int Iomega;
-int box_min;
 int Test;
 int iter;
-int AlphaBN, AlphaBNBilayer, Bilayer, CAC, CsCl, ZnSc, NaCl;
+
+// Phases
+int AlphaBN, AlphaBN_single;
+int CAC, CAC_single;
+int CsCl, CsCl_single;
+int ZnSc, ZnSc_single;
+int NaCl, NaCl_single;
+
+
 int LAM, HEX, BCC;
 int global_index = 0;
 int global_iter;

@@ -36,19 +36,26 @@ void omega(std::vector<double_array> &w, double_array &chiMatrix){
     // ** Read the phi, and not omega, it is more stable
     std::ifstream infile;
     if(AlphaBN==1){infile.open("./OMEGA/READ/omega_AlphaBN_32_32_32.read");}
-    if(AlphaBNBilayer==1){
+    if(AlphaBN_single==1){
       if(Nz==16){
-	infile.open("./OMEGA/READ/omega_AlphaBN_Bilayer_32_32_16.read");
+	infile.open("./OMEGA/READ/omega_AlphaBN_single_32_32_16.read");
       }else{
-	infile.open("./OMEGA/READ/omega_AlphaBN_Bilayer_32_32_32.read");
+	infile.open("./OMEGA/READ/omega_AlphaBN_single_32_32_32.read");
       }
     }
-    if(Bilayer==1){infile.open("./OMEGA/READ/.read");}
+    
     if(CAC==1){infile.open("./OMEGA/READ/omega_CAC_32_32_32.read");}
+    if(CAC_single==1){infile.open("./OMEGA/READ/omega_CAC_single_32_32_32.read");}
+
     if(ZnSc==1){infile.open("./OMEGA/READ/phi_ZnSc_32_32_32.read");}
-    if(LAM==1){infile.open("./OMEGA/READ/omega_LAM_32_32_32.read");}
+    if(ZnSc_single==1){infile.open("./OMEGA/READ/phi_ZnSc_single_32_32_32.read");}
+
+
     if(CsCl==1){infile.open("./OMEGA/READ/omega_CsCl_32_32_32.read");}
+    if(CsCl_single==1){infile.open("./OMEGA/READ/omega_CsCl_single_32_32_32.read");}
+
     if(NaCl==1){infile.open("./OMEGA/READ/omega_NaCl_32_32_32.read");}
+    if(NaCl_single==1){infile.open("./OMEGA/READ/omega_NaCl_single_32_32_32.read");}
     
     for(i=0;i<Nx;i+=1){
       for(j=0;j<Ny;j+=1){

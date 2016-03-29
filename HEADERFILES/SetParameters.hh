@@ -9,12 +9,6 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   mu_homo=-30000.0;
   mu_copo=0.0;
 
-  // 0 = Read From File    1 = Make Structure
-  Iomega=0;
-  
-  // Minimize with respect to box size (yes=1, No=0)
-  box_min=0;
-
   // Setting the generic chi parameters
   xAB=80.0;
   xAC=80.0;
@@ -44,11 +38,19 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
 
   // Initial Guess for box dimension
   if(CAC==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
+  if(CAC_single==1){ Lx=2.64; Ly=4.36; Lz=2.5;}
+  
   if(ZnSc==1){ Lx=4.0; Ly=4.0; Lz=4.0;}
-  if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
+  if(ZnSc_single==1){ Lx=4.0; Ly=4.0; Lz=4.0;}
+ 
   if(NaCl==1){ Lx=3.6; Ly=3.6; Lz=3.6;}
+  if(NaCl_single==1){ Lx=3.6; Ly=3.6; Lz=3.6;}
+
   if(CsCl==1){ Lx=2.3; Ly=2.3; Lz=2.3;}
-  if(AlphaBNBilayer==1){
+  if(CsCl_single==1){ Lx=2.3; Ly=2.3; Lz=2.3;}
+
+  if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
+  if(AlphaBN_single==1){
     if(Nz==16){
       // For fB2=9 mu=-13.2
       Lx=2.5; Ly=4.25; Lz=4.6;
