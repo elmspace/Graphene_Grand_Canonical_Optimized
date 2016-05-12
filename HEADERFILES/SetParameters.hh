@@ -52,10 +52,10 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   if(AlphaBN==1){ Lx=2.4; Ly=4.2; Lz=4.8;}
   if(AlphaBN_single==1){
     if(Nz==16){
-      // For fB2=9 mu=-13.2
-      Lx=2.5; Ly=4.25; Lz=4.6;
+      Lx=2.56; Ly=4.49; Lz=4.85;
     }else{
-      Lx=2.4; Ly=4.2; Lz=4.8;
+      //2.55 4.5 10.6
+      Lx=2.55; Ly=4.5; Lz=10.6;
     }
   }
 
