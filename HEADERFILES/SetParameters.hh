@@ -1,21 +1,14 @@
 void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_array &chiMatrix){
   
   int Ds;
-  double xAB,xAC,xBC, xAhom, xChom, xBhom;
   double a;
   double Lx,Ly,Lz;
+  double midBlockHom = 0.0;
+  double endBlockHom = 0.0;
 
   // Setting chemical potentials
   mu_homo=-30000.0;
   mu_copo=0.0;
-
-  // Setting the generic chi parameters
-  xAB=80.0;
-  xAC=80.0;
-  xBC=80.0;
-  xAhom=80.0;
-  xChom=80.0;
-  xBhom=0.0;
 
   // Degree of polymerization
   Ns[0]=10; // A
@@ -80,21 +73,28 @@ void parameters(double_array &chi,double &ds,int *Ns,double_array &dxyz,double_a
   std::cout<<"fB3= "<<fB3<<std::endl;
   
   // Setting up the individual chi values
-  chi(0)=xAC;  //xAC
-  chi(1)=xAB;  //xAB1
-  chi(2)=xAB;  //xAB2
-  chi(3)=xAB;  //xAB3
-  chi(4)=xAhom;  //xAB4
-  chi(5)=xBC;  //xCB1
-  chi(6)=xBC;  //xCB2
-  chi(7)=xBC;  //xCB3
-  chi(8)=xChom;  //xCB4
-  chi(9)=0.001;  //xB1B2
-  chi(10)=0.001; //xB1B3
-  chi(11)=xBhom; //xB1B4
-  chi(12)=0.001; //xB2B3
-  chi(13)=xBhom; //xB2B4
-  chi(14)=xBhom; //xB3B4
+  chi(0)=80.0;  //xAC
+  chi(1)=80.0;  //xAB1
+  chi(2)=80.0;  //xAB2
+  chi(3)=80.0;  //xAB3
+  chi(4)=80.0;  //xAB4
+  chi(5)=80.0;  //xCB1
+  chi(6)=80.0;  //xCB2
+  chi(7)=80.0;  //xCB3
+  chi(8)=80.0;  //xCB4
+  
+  chi(9)=0.0;  //xB1B2
+  chi(10)=0.0; //xB1B3
+ 
+  chi(11)=endBlockHom; //xB1B4
+  
+  chi(12)=0.0; //xB2B3
+  
+  chi(13)=midBlockHom; //xB2B4
+  
+  chi(14)=endBlockHom; //xB3B4
+  
+  
   // Setting up the chi matrix in this case 8 by 8
   //1
   chiMatrix(0,0)=0.0;       

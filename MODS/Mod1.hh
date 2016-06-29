@@ -5,7 +5,7 @@
  */
 void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_array &eta, int *Ns, double ds, double_array &k_vector, double_array &chi, double_array &dxyz, double_array &chiMatrix){
 
-  double del_mu = 0.05;
+  double del_mu = 0.025;
 
   // Tag1 and Tag2 are used for naming the output files
   Tag2 = (long long)(NB_middle);
@@ -27,7 +27,7 @@ void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_a
   Test = 0;
 
   parameters(chi,ds,Ns,dxyz,chiMatrix);
-  mu_homo=-13.25;
+  mu_homo=-15.00;
   mu_copo=0.0;
   activity=(1.0/kappa)*exp(kappa*(mu_homo - mu_copo));
   
@@ -68,7 +68,7 @@ void Mod1(std::vector<double_array> &w, std::vector<double_array> &phi, double_a
     mu_copo=0.0;
     activity=(1.0/kappa)*exp(kappa*(mu_homo - mu_copo));
     
-  }while(Phi_Homo_Ord<0.9);
+  }while(Phi_Homo_Ord<0.999);
   
 }
 
